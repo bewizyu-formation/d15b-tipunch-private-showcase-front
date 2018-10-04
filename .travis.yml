@@ -7,6 +7,12 @@ addons:
     - google-chrome
     packages:
     - google-chrome-stable
+  sonarcloud:
+    organization: bewizyu-formation
+    token:
+      secure: $SONAR_CLOUD_TOKEN
+    branches:
+    - master
 
 language: node_js
 node_js:
