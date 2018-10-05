@@ -34,7 +34,7 @@ script:
   - npm run ci:test
   - npm run e2e
   - sonar-scanner
-  - npm run build -- --aot --prod --build-optimizer --base-href /project-private-showcase-front/
+  - npm run build -- --aot --prod --build-optimizer --base-href /d15b-tipunch-private-showcase-front/
 
 deploy:
   provider: pages
