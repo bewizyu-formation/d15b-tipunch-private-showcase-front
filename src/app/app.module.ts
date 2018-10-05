@@ -11,6 +11,7 @@ import { ArtistsContainerComponent } from './artists-container/artists-container
 
 import { ROUTES } from './app.routes';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     LoginContainerComponent,
     HomeContainerComponent,
     UsersContainerComponent,
-    ArtistsContainerComponent
+    ArtistsContainerComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
