@@ -1,7 +1,7 @@
-export class City{
+export class City {
     constructor(
-        public id:number,
-        public departmentCode:string,
-        public name:string
-    ){}
+        public id: number,
+        public departmentCode: string,
+        public name: string
+    ) {}
 }

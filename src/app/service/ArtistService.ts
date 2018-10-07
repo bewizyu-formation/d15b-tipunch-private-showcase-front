@@ -1,30 +1,30 @@
-import { Injectable } from "@angular/core";
-import { ArtistApi } from "../api/ArtistApi";
-import { Artist } from "../model/Artist";
+import { Injectable } from '@angular/core';
+import { ArtistApi } from '../api/ArtistApi';
+import { Artist } from '../model/Artist';
 
-@Injectable({
+@Injectable( {
     providedIn: 'root'
 })
-export class ArtistService{
-    constructor(private artistApi:ArtistApi){};
+export class ArtistService {
+    constructor(private artistApi: ArtistApi) {};
 
-    save(artist:Artist){
+    save(artist: Artist) {
         this.artistApi.save(artist);
     }
 
-    findAll():Artist[]{
+    findAll(): Artist[] {
         return this.artistApi.findAll();
     }
 
-    findById(id:number):Artist{
+    findById(id: number): Artist {
         return this.artistApi.findById(id);
     }
 
-    update(artist:Artist){
+    update(artist: Artist) {
         return this.artistApi.update(artist);
     }
 
-    delete(artist:Artist){
+    delete(artist: Artist) {
         return this.artistApi.delete(artist);
     }
 }

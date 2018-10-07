@@ -1,7 +1,7 @@
-export class Department{
+export class Department {
     constructor(
-        public id:number,
-        public name:string,
-        public code:string
-    ){}
+        public id: number,
+        public name: string,
+        public code: string
+    ) {}
 }
