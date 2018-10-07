@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
 import { User } from "../model/User";
-import { USERS_MOCK } from "./mock";
+import { Mock } from "./mock";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserApi{
     //MOCK DATAS
-    public users:User[] = USERS_MOCK;
+    public users:User[] = [];
 
+    constructor(private mock:Mock){
+        this.users.push(...mock.USERS_MOCK);
+    }
     save(user:User){
         this.users.push(user);
     }
@@ -18,7 +21,7 @@ export class UserApi{
     }
 
     findById(id:number):User{
-        return this.users.filter(u => {u.id === id})[0];
+        return this.users.filter(user => user.id == id)[0];
     }
 
     update(user:User){

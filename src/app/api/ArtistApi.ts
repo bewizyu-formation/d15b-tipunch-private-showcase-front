@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Artist } from "../model/Artist";
-import { ARTISTS_MOCK } from "./mock";
+import { Mock } from "./mock";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ArtistApi{
-    public artists:Artist[] = ARTISTS_MOCK;
+    public artists:Artist[] = [];
+
+    constructor(private mock:Mock){
+        this.artists.push(...mock.ARTISTS_MOCK);
+    }
 
     save(artist:Artist){
         this.artists.push(artist);
@@ -17,7 +21,7 @@ export class ArtistApi{
     }
 
     findById(id:number):Artist{
-        return this.artists.filter(u => {u.id === id})[0];
+        return this.artists.filter(artist => artist.id == id)[0];
     }
 
     update(artist:Artist){
