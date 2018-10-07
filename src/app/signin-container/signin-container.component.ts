@@ -17,8 +17,8 @@ export class SigninContainerComponent implements OnInit {
   confirmPasswordCtrl: FormControl;
   emailCtrl: FormControl;
   cityCtrl: FormControl;
-  artistNameCtrl:FormControl;
-  descriptionCtrl:FormControl;
+  artistNameCtrl: FormControl;
+  descriptionCtrl: FormControl;
 
   // Datas
   filteredCities: Observable<string[]>;
@@ -28,7 +28,8 @@ export class SigninContainerComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     // Initializing controls for form fields
     this.loginCtrl = fb.control('', [Validators.required]);
-    this.passwordCtrl = fb.control('', [Validators.required, Validators.pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'))]);
+    this.passwordCtrl = fb.control('',
+      [Validators.required, Validators.pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'))]);
     this.confirmPasswordCtrl = fb.control('', [Validators.required]);
     this.emailCtrl = fb.control('', [Validators.required, Validators.email]);
     this.cityCtrl = fb.control('', [Validators.required]);
@@ -76,16 +77,14 @@ export class SigninContainerComponent implements OnInit {
 
   /**
    * @description Clear validators and reset fields when the artist-related checkbox is unchecked, set validators otherwise
-   * @param isArtist
    */
-  onCheckboxChange(isArtist:boolean) {
+  onCheckboxChange(isArtist: boolean) {
     if (isArtist) {
       this.descriptionCtrl.setValidators([Validators.required, Validators.maxLength(200)]);
       this.descriptionCtrl.updateValueAndValidity();
       this.artistNameCtrl.setValidators([Validators.required]);
       this.artistNameCtrl.updateValueAndValidity();
-    }
-    else {
+    } else {
       this.artistNameCtrl.clearValidators();
       this.descriptionCtrl.clearValidators();
       this.artistNameCtrl.reset('');
@@ -95,8 +94,6 @@ export class SigninContainerComponent implements OnInit {
 
   /**
    * @description Filter values of autocomplete field
-   * @param value
-   * @private
    */
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
