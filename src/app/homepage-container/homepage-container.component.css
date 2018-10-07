@@ -1,0 +1,46 @@
+.container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container__photo{
+    background-image: url("../../assets/img/guitar-1853661_1920.jpg");
+    background-size: cover;
+    width:100%;
+    height: 500px;
+}
+.container__informations{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.container__card{
+    width: 200px;
+    text-align: center;
+}
+.container__card img{
+    max-width: 100%;
+    border-radius: 50%;
+    box-shadow: 4px 4px 10px black;
+    transition: all 0.3s;
+}
+.container__card img:hover{
+    transform: scale(1.15);
+}
+.container__description{
+    font-size: 26px;
+}
+.container__description p:last-child{
+    font-size: 18px;
+}
+.container__content{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    color:white;
+    font-family: Tahoma, sans-serif;
+}
