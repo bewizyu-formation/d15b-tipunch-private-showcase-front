@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomepageContainerComponent } from './homepage-container.component';
+import {HomepageContainerComponent} from './homepage-container.component';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('HomepageContainerComponent', () => {
   let component: HomepageContainerComponent;
@@ -8,7 +9,8 @@ describe('HomepageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomepageContainerComponent ]
+      declarations: [ HomepageContainerComponent ],
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   }));
