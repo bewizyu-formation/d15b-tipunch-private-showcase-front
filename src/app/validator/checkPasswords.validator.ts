@@ -1,8 +1,8 @@
 import {FormGroup} from '@angular/forms';
 
 export function checkPasswords(group: FormGroup) {
-  const password = group.controls.password.value;
-  const confirmPassword = group.controls.confirmPassword.value;
+  const password = group.controls.password;
+  const confirmPassword = group.controls.confirmPassword;
 
-  return password === confirmPassword ? null : { notSame: true };
+  return password.value === confirmPassword.value ? null : confirmPassword.setErrors({ notSame: true });
 }

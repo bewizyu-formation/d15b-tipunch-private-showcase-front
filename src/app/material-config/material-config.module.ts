@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatAutocompleteModule, MatCardModule, MatCheckboxModule, MatGridListModule} from '@angular/material';
+import {
+  MatAutocompleteModule, MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatGridListModule,
+  MatInputModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -10,14 +16,18 @@ import {MatAutocompleteModule, MatCardModule, MatCheckboxModule, MatGridListModu
     MatAutocompleteModule,
     MatCheckboxModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports: [
     MatFormFieldModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    MatButtonModule
   ],
   declarations: []
 })

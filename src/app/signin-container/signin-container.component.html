@@ -1,0 +1,82 @@
+<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Identifiant" formControlName="login">
+      <mat-error *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">
+        Champ requis
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Mot de passe" formControlName="password">
+      <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.invalid">
+        Veuillez entrer un mot de passe avec au moins 8
+        caractères dont une majuscule, une minuscule et un chiffre
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Confirmez le mot de passe" formControlName="confirmPassword">
+      <mat-error
+        *ngIf="(confirmPasswordCtrl.touched && confirmPasswordCtrl.hasError('notSame'))">
+        Mots de passes différents
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error
+        *ngIf="(emailCtrl.hasError('email') && emailCtrl.touched)">
+        Email invalide
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error>Sélectionnez une ville</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-checkbox [(ngModel)]="isArtist" [ngModelOptions]="{standalone: true}" (change)="onCheckboxChange(isArtist)">
+      Êtes-vous un artiste proposant des prestations privées ?
+    </mat-checkbox>
+  </div>
+
+  <div *ngIf="isArtist">
+    <mat-form-field>
+      <input matInput placeholder="Nom d'artiste" formControlName="artistName">
+      <mat-error
+        *ngIf="artistNameCtrl.dirty && artistNameCtrl.hasError('required')">
+        Champs requis
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="isArtist">
+    <mat-form-field>
+      <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      <mat-error
+        *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">
+        Champs requis
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button mat-stroked-button type="submit" [disabled]="signinForm.invalid">Valider</button>
+  <button mat-stroked-button>Annuler</button>
+</form>
