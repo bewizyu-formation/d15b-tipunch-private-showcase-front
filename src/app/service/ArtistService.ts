@@ -6,7 +6,7 @@ import { Artist } from '../model/Artist';
     providedIn: 'root'
 })
 export class ArtistService {
-    constructor(private artistApi: ArtistApi) {};
+    constructor(private artistApi: ArtistApi) {}
 
     save(artist: Artist) {
         this.artistApi.save(artist);

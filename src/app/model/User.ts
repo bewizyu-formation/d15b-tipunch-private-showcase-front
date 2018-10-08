@@ -1,6 +1,6 @@
 import { City } from './City';
 
-export class User{
+export class User {
     constructor(
         public id: number,
         public login: string,

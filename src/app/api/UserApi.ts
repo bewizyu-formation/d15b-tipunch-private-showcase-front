@@ -6,7 +6,7 @@ import { Mock } from './mock';
     providedIn:  'root'
 })
 export class UserApi {
-    //MOCK DATAS
+    // MOCK DATAS
     public users: User[] = [];
 
     constructor(private mock: Mock) {
@@ -21,7 +21,7 @@ export class UserApi {
     }
 
     findById(id: number): User {
-        return this.users.filter(user => user.id == id)[0];
+        return this.users.filter(user => user.id === id)[0];
     }
 
     update(user: User) {

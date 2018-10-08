@@ -6,7 +6,7 @@ import { User } from '../model/User';
     providedIn: 'root'
 })
 export class UserService {
-    constructor(private userApi: UserApi) {};
+    constructor(private userApi: UserApi) {}
 
     save(user: User) {
         this.userApi.save(user);

@@ -8,10 +8,10 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class Mock {
-    public CITYS_MOCK:City[] = [];
-    public DEPTS_MOCK:Department[] = [];
-    public USERS_MOCK:User[] = [];
-    public ARTISTS_MOCK:Artist[] = [];
+    public CITYS_MOCK: City[] = [];
+    public DEPTS_MOCK: Department[] = [];
+    public USERS_MOCK: User[] = [];
+    public ARTISTS_MOCK: Artist[] = [];
 
     constructor() {
         this.CITYS_MOCK.push(...[
@@ -36,11 +36,11 @@ export class Mock {
         ]);
         this.ARTISTS_MOCK.push(...[
             new Artist(0, 'artist1', 'pass1', 'artist1@mail.fr', this.CITYS_MOCK[0], 'Just Rock',
-            'Rock description','artist1.site@site.fr', 'justrock@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
+            'Rock description', 'artist1.site@site.fr', 'justrock@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
             new Artist(1, 'artist2', 'pass2', 'artist2@mail.fr', this.CITYS_MOCK[1], 'Just Metal',
-            'Metal description','artist2.site@site.fr', 'justmetal@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
+            'Metal description', 'artist2.site@site.fr', 'justmetal@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
             new Artist(2, 'artist3', 'pass2', 'artist3@mail.fr', this.CITYS_MOCK[2], 'Just Reggae',
-            'Reggae description','artist3.site@site.fr', 'justreggae@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
+            'Reggae description', 'artist3.site@site.fr', 'justreggae@mail.fr', this.DEPTS_MOCK, 'default_artist.png'),
         ]);
     }
 }

@@ -21,7 +21,7 @@ export class ArtistApi {
     }
 
     findById(id: number): Artist {
-        return this.artists.filter(artist => artist.id == id)[0];
+        return this.artists.filter(artist => artist.id === id)[0];
     }
 
     update(artist: Artist) {
