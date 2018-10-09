@@ -1,4 +1,4 @@
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="form">
   <div>
     <mat-form-field>
       <input matInput placeholder="Identifiant" formControlName="login">
@@ -77,6 +77,8 @@
     </mat-form-field>
   </div>
 
-  <button mat-stroked-button type="submit" [disabled]="signinForm.invalid">Valider</button>
-  <button mat-stroked-button>Annuler</button>
+  <div class="form__buttons">
+    <button mat-stroked-button type="submit" [disabled]="signinForm.invalid" class="form__buttons_item"> Valider </button>
+    <button mat-stroked-button class="form__buttons_item"> Annuler </button>
+  </div>
 </form>
