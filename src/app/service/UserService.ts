@@ -27,4 +27,8 @@ export class UserService {
     delete(user: User) {
         return this.userApi.delete(user);
     }
+
+    checkLoginNotTaken(login: string): boolean {
+      return this.userApi.checkLoginNotTaken(login);
+    }
 }

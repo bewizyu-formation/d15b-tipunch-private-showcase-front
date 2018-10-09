@@ -12,6 +12,9 @@ import {ArtistsContainerComponent} from './artists-container/artists-container.c
 import {ROUTES} from './app.routes';
 import {RouterModule} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialConfigModule} from './material-config/material-config.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,11 @@ import {HeaderComponent} from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialConfigModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
