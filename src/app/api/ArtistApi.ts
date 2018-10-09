@@ -1,44 +1,32 @@
-import { Injectable } from '@angular/core';
-import { Artist } from '../model/Artist';
-import { Mock } from './mock';
+import {Injectable} from '@angular/core';
+import {Artist} from '../model/Artist';
+import {HttpClient} from '../../../node_modules/@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ArtistApi {
-    public artists: Artist[] = [];
 
-    constructor(private mock: Mock) {
-        this.artists.push(...mock.ARTISTS_MOCK);
-    }
+  constructor(private http: HttpClient ) {
+  }
+  save(artist: Artist)  {
+    return this.http.post(`${environment.API_BASE_URL}${environment.ARTIST_URL}`, artist);
+  }
 
-    save(artist: Artist) {
-        this.artists.push(artist);
-    }
+  findAll() {
+    return this.http.get(`${environment.API_BASE_URL}${environment.ARTIST_URL}`);
+  }
 
-    findAll(): Artist[] {
-        return this.artists;
-    }
+  findById(id: number) {
+    return this.http.get(`${environment.API_BASE_URL}${environment.ARTIST_URL}${id}`);
+  }
 
-    findById(id: number): Artist {
-        return this.artists.filter(artist => artist.id === id)[0];
-    }
+  update(artist: Artist) {
+    return this.http.put(`${environment.API_BASE_URL}${environment.ARTIST_URL}${artist.id}`, artist);
+  }
 
-    update(artist: Artist) {
-        if (this.artists.length !== 0) {
-            const index = this.artists.indexOf(this.findById(artist.id)[0]);
-            if (index !== -1) {
-                this.artists[index] = artist;
-            }
-        }
-    }
-
-    delete(artist: Artist) {
-        if (this.artists.length !== 0) {
-            const index = this.artists.indexOf(artist);
-            if (index !== -1) {
-                this.artists.splice(index, 1);
-            }
-        }
-    }
+  delete(artist: Artist) {
+    return this.http.delete(`${environment.API_BASE_URL}${environment.ARTIST_URL}${artist.id}`);
+  }
 }

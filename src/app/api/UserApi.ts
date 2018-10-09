@@ -1,51 +1,34 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/User';
-import { Mock } from './mock';
+import { environment } from '../../environments/environment';
+
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn:  'root'
 })
 export class UserApi {
-    // MOCK DATAS
-    public users: User[] = [];
 
-    constructor(private mock: Mock) {
-        this.users.push(...mock.USERS_MOCK);
+  constructor(private http: HttpClient ) {
     }
     save(user: User)  {
-        this.users.push(user);
+      return this.http.post(`${environment.API_BASE_URL}${environment.USERS_URL}`, user);
     }
 
-    findAll(): User[] {
-        return this.users;
+    findAll() {
+      return this.http.get(`${environment.API_BASE_URL}${environment.USERS_URL}`);
     }
 
-    findById(id: number): User {
-        return this.users.filter(user => user.id === id)[0];
+    findById(id: number) {
+      return this.http.get(`${environment.API_BASE_URL}${environment.USERS_URL}${id}`);
     }
 
     update(user: User) {
-        if (this.users.length !== 0) {
-            const index = this.users.indexOf(this.findById(user.id)[0]);
-            if (index !== -1) {
-                this.users[index] = user;
-            }
-        }
+      return this.http.put(`${environment.API_BASE_URL}${environment.USERS_URL}${user.id}`, user);
     }
 
     delete(user: User) {
-        if (this.users.length !== 0) {
-            const index = this.users.indexOf(user);
-            if (index !== -1) {
-                this.users.splice(index, 1);
-            }
-        }
-    }
-
-    checkLoginNotTaken(login: string): boolean {
-      if (this.users.map(user => user.login).indexOf(login) !== -1) {
-        return false;
-      }
-      return true;
+      return this.http.delete(`${environment.API_BASE_URL}${environment.USERS_URL}${user.id}`);
     }
 }
