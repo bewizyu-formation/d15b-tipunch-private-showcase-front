@@ -55,20 +55,6 @@ export class SigninContainerComponent implements OnInit {
       'artistName': this.artistNameCtrl,
       'description': this.descriptionCtrl
     }, {validator: checkPasswords});
-
-    // Initializing objects to add
-    this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
-    this.newArtist = new Artist(undefined,
-                                  this.loginCtrl.value,
-                                  this.passwordCtrl.value,
-                                  this.emailCtrl.value,
-                                  this.cityCtrl.value,
-                                  this.artistNameCtrl.value,
-                                  this.descriptionCtrl.value,
-                                  undefined,
-                                  this.emailCtrl.value,
-                                  undefined,
-                                  undefined);
   }
 
   ngOnInit() {
@@ -94,16 +80,23 @@ export class SigninContainerComponent implements OnInit {
   }
 
   onSubmit() {
-    // Object.keys.forEach((field) => {
-    //   this.newUser[field].updateValueAndValidity();
-    // });
-    // if (this.isArtist) {
-    //   console.log(this.newArtist);
-    //   this.artistService.save(this.newArtist);
-    // } else {
-    //   console.log(this.newUser);
-    //   this.userService.save(this.newUser);
-    // }
+    if (this.isArtist) {
+      this.newArtist = new Artist(undefined,
+        this.loginCtrl.value,
+        this.passwordCtrl.value,
+        this.emailCtrl.value,
+        this.cityCtrl.value,
+        this.artistNameCtrl.value,
+        this.descriptionCtrl.value,
+        undefined,
+        this.emailCtrl.value,
+        undefined,
+        undefined);
+      this.artistService.save(this.newArtist);
+    } else {
+      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
+      this.userService.save(this.newUser);
+    }
   }
 
   /**
