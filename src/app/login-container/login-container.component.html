@@ -1,3 +1,25 @@
-<p>
-  login-container works!
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+  <h2>Formulaire de connexion</h2>
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Identifiant" formControlName="login">
+      <mat-error *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">
+        Champ requis
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Mot de passe" formControlName="password">
+      <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+        Champ requis
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form__buttons">
+    <button mat-stroked-button type="submit" [disabled]="loginForm.invalid" class="form__buttons_item"> Valider </button>
+    <button mat-stroked-button class="form__buttons_item" [routerLink]="['/']"> Annuler </button>
+  </div>
+</form>
