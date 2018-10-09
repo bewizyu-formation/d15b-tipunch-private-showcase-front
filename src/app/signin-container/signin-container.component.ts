@@ -55,6 +55,20 @@ export class SigninContainerComponent implements OnInit {
       'artistName': this.artistNameCtrl,
       'description': this.descriptionCtrl
     }, {validator: checkPasswords});
+
+    // Initializing objects to add
+    this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
+    this.newArtist = new Artist(undefined,
+                                  this.loginCtrl.value,
+                                  this.passwordCtrl.value,
+                                  this.emailCtrl.value,
+                                  this.cityCtrl.value,
+                                  this.artistNameCtrl.value,
+                                  this.descriptionCtrl.value,
+                                  undefined,
+                                  this.emailCtrl.value,
+                                  undefined,
+                                  undefined);
   }
 
   ngOnInit() {
