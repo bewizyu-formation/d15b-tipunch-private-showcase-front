@@ -27,3 +27,9 @@
 .form__buttons_item {
   margin: 5px;
 }
+
+.form h2 {
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}

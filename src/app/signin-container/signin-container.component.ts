@@ -3,6 +3,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
+import {UserService} from '../service/UserService';
+import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
+import {ArtistService} from '../service/ArtistService';
+import {User} from '../model/User';
+import {Artist} from '../model/Artist';
 
 @Component({
   selector: 'app-signin-container',
@@ -20,14 +25,18 @@ export class SigninContainerComponent implements OnInit {
   artistNameCtrl: FormControl;
   descriptionCtrl: FormControl;
 
+  // Field variables to add user/artist
+  newUser: User;
+  newArtist: Artist;
+
   // Datas
   filteredCities: Observable<string[]>;
   cities: string[];
   isArtist = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService, private artistService: ArtistService) {
     // Initializing controls for form fields
-    this.loginCtrl = fb.control('', [Validators.required]);
+    this.loginCtrl = fb.control('', [Validators.required, validateLoginNotTaken(this.userService)]);
     this.passwordCtrl = fb.control('',
       [Validators.required, Validators.pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'))]);
     this.confirmPasswordCtrl = fb.control('', [Validators.required]);
@@ -35,7 +44,6 @@ export class SigninContainerComponent implements OnInit {
     this.cityCtrl = fb.control('', [Validators.required]);
     this.artistNameCtrl = fb.control('');
     this.descriptionCtrl = fb.control('');
-    // TODO : appel réseau pour valider si le login existe ou non en base
 
     // Initializing form group control
     this.signinForm = fb.group({
@@ -47,6 +55,20 @@ export class SigninContainerComponent implements OnInit {
       'artistName': this.artistNameCtrl,
       'description': this.descriptionCtrl
     }, {validator: checkPasswords});
+
+    // Initializing objects to add
+    this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
+    this.newArtist = new Artist(undefined,
+                                  this.loginCtrl.value,
+                                  this.passwordCtrl.value,
+                                  this.emailCtrl.value,
+                                  this.cityCtrl.value,
+                                  this.artistNameCtrl.value,
+                                  this.descriptionCtrl.value,
+                                  undefined,
+                                  this.emailCtrl.value,
+                                  undefined,
+                                  undefined);
   }
 
   ngOnInit() {
@@ -72,7 +94,16 @@ export class SigninContainerComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO : effectuer l'appel réseau pour mettre l'utilisateur en base
+    // Object.keys.forEach((field) => {
+    //   this.newUser[field].updateValueAndValidity();
+    // });
+    // if (this.isArtist) {
+    //   console.log(this.newArtist);
+    //   this.artistService.save(this.newArtist);
+    // } else {
+    //   console.log(this.newUser);
+    //   this.userService.save(this.newUser);
+    // }
   }
 
   /**

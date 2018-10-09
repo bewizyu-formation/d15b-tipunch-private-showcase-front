@@ -41,4 +41,11 @@ export class UserApi {
             }
         }
     }
+
+    checkLoginNotTaken(login: string): boolean {
+      if (this.users.map(user => user.login).indexOf(login) !== -1) {
+        return false;
+      }
+      return true;
+    }
 }
