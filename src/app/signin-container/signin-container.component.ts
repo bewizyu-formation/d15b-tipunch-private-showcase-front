@@ -36,7 +36,7 @@ export class SigninContainerComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private userService: UserService, private artistService: ArtistService) {
     // Initializing controls for form fields
-    this.loginCtrl = fb.control('', [Validators.required, validateLoginNotTaken(this.userService)]);
+    this.loginCtrl = fb.control('', [Validators.required/*, validateLoginNotTaken(this.userService)*/]);
     this.passwordCtrl = fb.control('',
       [Validators.required, Validators.pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'))]);
     this.confirmPasswordCtrl = fb.control('', [Validators.required]);
@@ -108,7 +108,7 @@ export class SigninContainerComponent implements OnInit {
         undefined);
       this.artistService.save(this.newArtist);
     } else {
-      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
+      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, 1);
       this.userService.save(this.newUser);
     }
   }

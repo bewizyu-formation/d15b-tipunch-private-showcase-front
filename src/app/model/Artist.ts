@@ -8,7 +8,7 @@ export class Artist extends User {
         login: string,
         password: string,
         email: string,
-        city: City,
+        city: number,
         public artistName: string,
         public description: string,
         public website: string,

@@ -16,7 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialConfigModule} from './material-config/material-config.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service' ;
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,12 +30,12 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialConfigModule,
-    HttpClientModule,
+    MaterialConfigModule
   ],
   providers: [
     CookieService,
