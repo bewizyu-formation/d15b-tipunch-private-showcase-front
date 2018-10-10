@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { LoginService } from '../service/LoginService';
 
 @Component({
   selector: 'app-login-container',
@@ -11,7 +12,7 @@ export class LoginContainerComponent implements OnInit {
   loginCtrl: FormControl;
   passwordCtrl: FormControl;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private loginService:LoginService) {
     this.loginCtrl = fb.control('', [Validators.required]);
     this.passwordCtrl = fb.control('', [Validators.required]);
 
@@ -25,6 +26,11 @@ export class LoginContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() { }
+  onSubmit() {
+    console.log(this.loginForm.value);
+    const login:string = this.loginForm.value.login;
+    const password:string = this.loginForm.value.password;
+    this.loginService.login(login, password);
+  }
 
 }
