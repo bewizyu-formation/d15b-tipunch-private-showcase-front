@@ -11,8 +11,14 @@ export class LoginService{
 
     login(login:string, password:string){
         this.loginApi.login(login, password)
-            .subscribe(data => {
-                console.log(data.authorization);
-            });
+            .subscribe(resp => this.storeJwtInCookie(resp.headers));
+    }
+
+    private storeJwtInCookie(headers){
+        headers.keys().forEach(k => {
+            if(k === 'authorization'){
+                console.log(headers.get(k));
+            }
+        })
     }
 }
