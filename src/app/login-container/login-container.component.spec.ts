@@ -13,7 +13,7 @@ describe('LoginContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         FormsModule,
         ReactiveFormsModule,
         MaterialConfigModule,
@@ -21,7 +21,7 @@ describe('LoginContainerComponent', () => {
         HttpClientModule,
         BrowserAnimationsModule,
       ],
-      declarations: [ 
+      declarations: [
         LoginContainerComponent,
        ],
        providers: [
