@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { LoginApi } from "../api/LoginApi";
-import { Response } from "selenium-webdriver/http";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService{
 
-    constructor(private loginApi:LoginApi, ){}
+    constructor(private loginApi:LoginApi, private cookieService:CookieService ){}
 
     login(login:string, password:string){
         this.loginApi.login(login, password)
@@ -17,7 +17,7 @@ export class LoginService{
     private storeJwtInCookie(headers){
         headers.keys().forEach(k => {
             if(k === 'authorization'){
-                console.log(headers.get(k));
+                this.cookieService.set('tokenUser', headers.get(k))
             }
         })
     }

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { LoginResponse } from "../model/LoginResponse";
 import { Observable } from "rxjs";
 
 const API_BASE_URL: string = 'http://localhost:8080/';
