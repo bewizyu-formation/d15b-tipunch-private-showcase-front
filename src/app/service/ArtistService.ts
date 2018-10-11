@@ -7,7 +7,8 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class ArtistService {
-  public artists$: BehaviorSubject<Artist[]> = new BehaviorSubject<Artist[]>([]);
+
+  private artists$: BehaviorSubject<Artist[]> = new BehaviorSubject<Artist[]>([]);
 
   constructor(private artistApi: ArtistApi) {
   }
@@ -29,6 +30,12 @@ export class ArtistService {
     return this.artistApi.findById(id);
   }
 
+  findAllByDeptId(id: number) {
+    return this.artistApi.findAllByDeptId(id).subscribe(
+      (artists: Artist[]) => this.artists$.next(artists),
+      (e) => {console.log(e); });
+  }
+
   update(artist: Artist) {
     this.artistApi.update(artist).subscribe((artists: Artist) => {
       const value: Artist[] = this.artists$.getValue();
@@ -44,4 +51,13 @@ export class ArtistService {
       this.artists$.next(this.artists$.getValue().filter(a => a.id !== artist.id));
     });
   }
+
+  get getArtists$(): BehaviorSubject<Artist[]> {
+    return this.artists$;
+  }
+
+  set setArtists$(value: BehaviorSubject<Artist[]>) {
+    this.artists$ = value;
+  }
+
 }
