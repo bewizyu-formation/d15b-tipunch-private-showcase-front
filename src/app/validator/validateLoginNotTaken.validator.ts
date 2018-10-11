@@ -1,6 +1,6 @@
 import {AbstractControl} from '@angular/forms';
 import {UserService} from '../service/UserService';
-import {map} from 'rxjs/Operators';
+import {map} from 'rxjs/operators';
 
 export function validateLoginNotTaken(userService: UserService) {
   return (control: AbstractControl) => {
