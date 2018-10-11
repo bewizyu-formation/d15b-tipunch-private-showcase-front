@@ -6,6 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialConfigModule} from '../material-config/material-config.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('SigninContainerComponent', () => {
   let component: SigninContainerComponent;
@@ -14,7 +15,7 @@ describe('SigninContainerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SigninContainerComponent ],
-      imports: [RouterTestingModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, MaterialConfigModule],
+      imports: [RouterTestingModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, MaterialConfigModule, HttpClientModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
