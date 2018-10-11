@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  color: ghostwhite;
+  padding-top: 100px;
+  margin-top: 0;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  padding:5px;
+  height: 80vh;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.mat-card {
+  flex: 0 2 300px;
+  color: ghostwhite;
+  height: 250px;
+  width: 250px;
+  padding: 0;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.mat-card img {
+  object-fit: cover;
+}
+
+.mat-card-content {
+  background-color: rgb(74,74,74);
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.mat-card-content h3, p {
+  text-align: center;
+  padding-top: 7px;
+}
