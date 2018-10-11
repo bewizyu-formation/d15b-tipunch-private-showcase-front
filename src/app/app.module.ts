@@ -17,7 +17,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialConfigModule} from './material-config/material-config.module';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HeaderInterceptor} from './service/HeaderInterceptor';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {CookieService} from 'ngx-cookie-service';
   ],
   providers: [
     CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
