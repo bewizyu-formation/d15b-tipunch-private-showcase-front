@@ -1,51 +1,38 @@
-import { Injectable } from '@angular/core';
-import { User } from '../model/User';
-import { Mock } from './mock';
+import {Injectable} from '@angular/core';
+import {User} from '../model/User';
+import {environment} from '../../environments/environment';
+
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+
+const USERS_URL = 'users/';
 
 @Injectable({
-    providedIn:  'root'
+  providedIn: 'root'
 })
 export class UserApi {
-    // MOCK DATAS
-    public users: User[] = [];
 
-    constructor(private mock: Mock) {
-        this.users.push(...mock.USERS_MOCK);
-    }
-    save(user: User)  {
-        this.users.push(user);
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    findAll(): User[] {
-        return this.users;
-    }
+  save(user: User) {
+    return this.http.post(`${environment.API_BASE_URL}${USERS_URL}`, user);
+  }
 
-    findById(id: number): User {
-        return this.users.filter(user => user.id === id)[0];
-    }
+  findAll() {
+    return this.http.get(`${environment.API_BASE_URL}${USERS_URL}`);
+  }
 
-    update(user: User) {
-        if (this.users.length !== 0) {
-            const index = this.users.indexOf(this.findById(user.id)[0]);
-            if (index !== -1) {
-                this.users[index] = user;
-            }
-        }
-    }
+  findById(id: number) {
+    return this.http.get(`${environment.API_BASE_URL}${USERS_URL}${id}`);
+  }
 
-    delete(user: User) {
-        if (this.users.length !== 0) {
-            const index = this.users.indexOf(user);
-            if (index !== -1) {
-                this.users.splice(index, 1);
-            }
-        }
-    }
+  update(user: User) {
+    return this.http.put(`${environment.API_BASE_URL}${USERS_URL}${user.id}`, user);
+  }
 
-    checkLoginNotTaken(login: string): boolean {
-      if (this.users.map(user => user.login).indexOf(login) !== -1) {
-        return false;
-      }
-      return true;
-    }
+  delete(user: User) {
+    return this.http.delete(`${environment.API_BASE_URL}${USERS_URL}${user.id}`);
+  }
 }

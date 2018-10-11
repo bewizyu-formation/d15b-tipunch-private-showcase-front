@@ -1,30 +1,47 @@
-import { Injectable } from '@angular/core';
-import { ArtistApi } from '../api/ArtistApi';
-import { Artist } from '../model/Artist';
+import {Injectable} from '@angular/core';
+import {ArtistApi} from '../api/ArtistApi';
+import {Artist} from '../model/Artist';
+import {BehaviorSubject} from 'rxjs';
 
-@Injectable( {
-    providedIn: 'root'
+@Injectable({
+  providedIn: 'root'
 })
 export class ArtistService {
-    constructor(private artistApi: ArtistApi) {}
+  public artists$: BehaviorSubject<Artist[]> = new BehaviorSubject<Artist[]>([]);
 
-    save(artist: Artist) {
-        this.artistApi.save(artist);
-    }
+  constructor(private artistApi: ArtistApi) {
+  }
 
-    findAll(): Artist[] {
-        return this.artistApi.findAll();
-    }
+  save(artist: Artist): void {
+    this.artistApi.save(artist).subscribe(
+      (artists: Artist) => this.artists$.next([artists, ...this.artists$.getValue()]),
+      (e) => {console.log(e); }
+      );
+  }
 
-    findById(id: number): Artist {
-        return this.artistApi.findById(id);
-    }
+  findAll() {
+    return this.artistApi.findAll().subscribe(
+      (artists: Artist[]) => this.artists$.next(artists),
+      (e) => {console.log(e); });
+  }
 
-    update(artist: Artist) {
-        return this.artistApi.update(artist);
-    }
+  findById(id: number) {
+    return this.artistApi.findById(id);
+  }
 
-    delete(artist: Artist) {
-        return this.artistApi.delete(artist);
-    }
+  update(artist: Artist) {
+    this.artistApi.update(artist).subscribe((artists: Artist) => {
+      const value: Artist[] = this.artists$.getValue();
+      const index = value.indexOf(value.filter(t => t.id === artists.id)[0]);
+      value[index] = artists;
+      this.artists$.next(value);
+
+    });
+  }
+
+  delete(artist: Artist) {
+    this.artistApi.delete(artist).subscribe(() => {
+      this.artists$.next(this.artists$.getValue().filter(a => a.id !== artist.id));
+    });
+  }
 }

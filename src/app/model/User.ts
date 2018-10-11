@@ -6,6 +6,6 @@ export class User {
         public login: string,
         public password: string,
         public email: string,
-        public city: City,
+        public city: number,
     ) {}
 }
