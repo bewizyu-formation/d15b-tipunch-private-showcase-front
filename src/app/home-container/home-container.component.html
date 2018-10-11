@@ -1,8 +1,10 @@
 <h2>Artistes de votre région</h2>
-  <mat-card>
-    <mat-grid-list cols="3">
-      <mat-grid-tile *ngFor="let artist of artists">
-        John
-      </mat-grid-tile>
-    </mat-grid-list>
+<div class="flex-container">
+  <mat-card *ngFor="let artist of artists">
+    <img mat-card-image src="{{artist.picture}}" alt="{{artist.artistName}}">
+    <mat-card-content>
+      <h3>{{artist.artistName}}</h3>
+      <p>{{artist.description}}</p>
+    </mat-card-content>
   </mat-card>
+</div>
