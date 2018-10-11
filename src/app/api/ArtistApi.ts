@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 
 
 const ARTIST_URL = 'artists/';
+const DEPARTMENT_URL = 'department/';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,10 @@ export class ArtistApi {
 
   findById(id: number) {
     return this.http.get(`${environment.API_BASE_URL}${ARTIST_URL}${id}`);
+  }
+
+  findAllByDeptId(id: number) {
+    return this.http.get(`${environment.API_BASE_URL}${ARTIST_URL}${DEPARTMENT_URL}${id}`);
   }
 
   update(artist: Artist) {
