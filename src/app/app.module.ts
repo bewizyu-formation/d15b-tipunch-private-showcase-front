@@ -15,7 +15,8 @@ import {HeaderComponent} from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialConfigModule} from './material-config/material-config.module';
-
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +35,11 @@ import {MaterialConfigModule} from './material-config/material-config.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialConfigModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    CookieService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
