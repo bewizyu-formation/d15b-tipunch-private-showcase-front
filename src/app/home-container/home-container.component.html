@@ -1,6 +1,6 @@
 <h2>Artistes de votre région</h2>
 <div class="flex-container">
-  <mat-card *ngFor="let artist of artists">
+  <mat-card *ngFor="let artist of artists | async">
     <img mat-card-image src="{{artist.picture}}" alt="{{artist.artistName}}">
     <mat-card-content>
       <h3>{{artist.artistName}}</h3>

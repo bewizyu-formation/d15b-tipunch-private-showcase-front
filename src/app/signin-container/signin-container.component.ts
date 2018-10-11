@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, startWith} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
 import {UserService} from '../service/UserService';
 import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
@@ -136,6 +136,6 @@ export class SigninContainerComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.cities.filter(city => city.toLowerCase().includes(filterValue));
+    return this.cities.filter(city => city.toLowerCase().startsWith(filterValue));
   }
 }
