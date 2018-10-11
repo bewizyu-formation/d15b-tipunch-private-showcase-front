@@ -7,15 +7,15 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HeaderInterceptor implements HttpInterceptor {
 
-  constructor(private cookieService: CookieService ){}
+  constructor(private cookieService: CookieService ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('/artists') || req.url.includes('/users')) {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });
-    
-    if(this.cookieService.check('tokenUser')){
+
+    if (this.cookieService.check('tokenUser')) {
       headers = headers.set('Authorization', this.cookieService.get('tokenUser'));
     }
       const clone = req.clone({headers});
