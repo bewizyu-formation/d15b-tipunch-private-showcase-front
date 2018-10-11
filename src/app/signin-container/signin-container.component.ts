@@ -99,7 +99,7 @@ export class SigninContainerComponent implements OnInit {
         this.loginCtrl.value,
         this.passwordCtrl.value,
         this.emailCtrl.value,
-        this.cityCtrl.value,
+        1,
         this.artistNameCtrl.value,
         this.descriptionCtrl.value,
         undefined,
