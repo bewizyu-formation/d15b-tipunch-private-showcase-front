@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {ArtistApi} from '../api/ArtistApi';
 import {Artist} from '../model/Artist';
 import {BehaviorSubject} from 'rxjs';
+import {DepartmentService} from './DepartmentService';
+import {Department} from '../model/Department';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +11,26 @@ import {BehaviorSubject} from 'rxjs';
 export class ArtistService {
 
   private artists$: BehaviorSubject<Artist[]> = new BehaviorSubject<Artist[]>([]);
+  arrayDept: Department[] = [];
 
-  constructor(private artistApi: ArtistApi) {
+  constructor(private artistApi: ArtistApi, public deptService: DepartmentService) {
   }
 
   save(artist: Artist): void {
     this.artistApi.save(artist).subscribe(
       (artists: Artist) => this.artists$.next([artists, ...this.artists$.getValue()]),
-      (e) => {console.log(e); }
-      );
+      (e) => {
+        console.log(e);
+      }
+    );
   }
 
   findAll() {
     return this.artistApi.findAll().subscribe(
       (artists: Artist[]) => this.artists$.next(artists),
-      (e) => {console.log(e); });
+      (e) => {
+        console.log(e);
+      });
   }
 
   findById(id: number) {
@@ -32,8 +39,31 @@ export class ArtistService {
 
   findAllByDeptId(id: number) {
     return this.artistApi.findAllByDeptId(id).subscribe(
-      (artists: Artist[]) => this.artists$.next(artists),
-      (e) => {console.log(e); });
+      (artists: Artist[]) => {
+        this.artists$.next(artists);
+        this.deptService.findAll().subscribe((departments: Department[] ) => {
+          this.arrayDept = departments;
+
+          artists.forEach((a: Artist) => {
+            this.linkDeptToArtiste(a, departments);
+          });
+        });
+
+        artists.forEach((a: Artist) => {
+          console.log(a);
+        });
+
+
+      });
+  }
+
+  linkDeptToArtiste(artist: Artist, dept: Department[]) {
+    const allowDept: number[] = artist['allowedDepartment'] ;
+    console.log(artist);
+    allowDept.forEach(id => {
+      artist.departments.push(dept[id - 1]);
+    });
+    console.log(artist);
   }
 
   update(artist: Artist) {

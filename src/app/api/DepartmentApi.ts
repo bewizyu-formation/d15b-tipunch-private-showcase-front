@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
-const DEPTARTMENT_URL = 'departments/';
+const DEPTARTMENT_URL = 'departments';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class DepartmentApi {
   }
 
   findById(id: number) {
-    return this.http.get(`${environment.API_BASE_URL}${DEPTARTMENT_URL}${id}`);
+    return this.http.get(`${environment.API_BASE_URL}${DEPTARTMENT_URL}/${id}`);
   }
+
 }
