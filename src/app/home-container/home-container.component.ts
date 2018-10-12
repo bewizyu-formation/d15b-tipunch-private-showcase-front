@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {ArtistService} from '../service/ArtistService';
-import {DepartmentService} from '../service/DepartmentService';
+import { HeaderService } from '../service/HeaderService';
 import {Artist} from '../model/Artist';
 
 
@@ -14,7 +14,7 @@ export class HomeContainerComponent implements OnInit {
   artists: Observable<Artist[]> = new Observable<Artist[]>();
   artist: Observable<Artist> = new Observable<Artist>();
 
-  constructor(private artistService: ArtistService, private ds: DepartmentService) {
+  constructor(private artistService: ArtistService, private headerService: HeaderService) {
   }
 
   ngOnInit() {
@@ -26,6 +26,7 @@ export class HomeContainerComponent implements OnInit {
     console.log(this.artist);
 
 
+    this.headerService.emitChange("Artistes dans votre département");
   }
 
 }
