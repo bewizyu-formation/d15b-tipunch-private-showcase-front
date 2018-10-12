@@ -15,10 +15,8 @@ export class HeaderComponent implements OnInit {
   constructor(private headerService:HeaderService,  private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.headerService.emitChange("Private ShowCase");
     this.title$.subscribe(v => this.title = v);
-    console.log(this.isLogged());
-    
+    this.headerService.emitChange("Private ShowCase");
   }
 
   isLogged(){
