@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ArtistService} from '../service/ArtistService';
 import { HeaderService } from '../service/HeaderService';
 import {Artist} from '../model/Artist';
@@ -28,5 +28,4 @@ export class HomeContainerComponent implements OnInit {
 
     this.headerService.emitChange('Artistes dans votre département', 'home');
   }
-
 }

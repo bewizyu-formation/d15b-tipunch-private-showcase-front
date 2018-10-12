@@ -54,10 +54,8 @@ export class ArtistService {
   }
 
   findAllByDeptId(id: number) {
-    return this.artistApi.findAllByDeptId(id).subscribe(
-      (artists: Artist[]) => {
-        this.mapArtistWithDepartment(artists);
-      });
+    return this.artistApi.findAllByDeptId(id).pipe(
+      tap((artists: Artist[]) => this.artists$.next(artists)));
   }
 
   mapArtistWithDepartment(artists: Artist[]) {
