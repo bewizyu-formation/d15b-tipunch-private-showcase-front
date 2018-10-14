@@ -16,10 +16,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.title$.subscribe(v => this.title = v);
-    this.headerService.emitChange("Private ShowCase");
   }
 
   isLogged(){
     return this.cookieService.check('tokenUser');
+  }
+
+  navigateToProfile(){
+    console.log("NAVIGATE TO PROFILE FUNCTION SHOULD BE DEV");
+  }
+  logout(){
+    console.log("LOGOUT FUNCTION SHOULD BE DEV");
   }
 }

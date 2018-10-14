@@ -19,6 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HeaderInterceptor} from './service/HeaderInterceptor';
+import { EventContainerComponent } from './event-container/event-container.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {HeaderInterceptor} from './service/HeaderInterceptor';
     HomeContainerComponent,
     UsersContainerComponent,
     ArtistsContainerComponent,
-    HeaderComponent
+    HeaderComponent,
+    EventContainerComponent
   ],
   imports: [
     BrowserModule,

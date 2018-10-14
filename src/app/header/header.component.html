@@ -1,15 +1,16 @@
 <div class="container">
-  <div class="container__box" *ngIf="title === 'Artistes dans votre département'">
+  <div class="" *ngIf="title === 'Artistes dans votre département'">
       <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item
-          [routerLink]="['/']">
+          [routerLink]="['/home']">
             <mat-icon>home</mat-icon>
             <span>Accueil</span>
           </button>
-          <button mat-menu-item disabled>
+          <button mat-menu-item
+          [routerLink]="['/home/events']">
             <mat-icon>send</mat-icon>
             <span>Evenements</span>
           </button>
@@ -19,6 +20,7 @@
           </button>
         </mat-menu>
   </div>
+  <div class="container__box"></div>
   <h1>{{title}}</h1>
   <div class="container__box">
     <div *ngIf="isLogged() === false">
@@ -32,7 +34,7 @@
       <p> Vous êtes connecté !</p>
     </div>
   </div>
-  <div class="container__box" *ngIf="title === 'Artistes dans votre département'">
+  <div class="" *ngIf="title === 'Artistes dans votre département'">
       <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -42,11 +44,13 @@
             <mat-icon>music_note</mat-icon>
             <span>Artistes</span>
           </button>
-          <button mat-menu-item disabled>
+          <button mat-menu-item
+          (click) = navigateToProfile()>
             <mat-icon>settings</mat-icon>
             <span>Profil</span>
           </button>
           <button mat-menu-item
+          (click) = logout()
           [routerLink]="['/']">
             <mat-icon>logout</mat-icon>
             <span>Deconnexion</span>
