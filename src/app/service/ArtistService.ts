@@ -11,7 +11,7 @@ import {Department} from '../model/Department';
 export class ArtistService {
 
   private artists$: BehaviorSubject<Artist[]> = new BehaviorSubject<Artist[]>([]);
-  arrayDept: Department[] = [];
+  arrayDept: object[] = [];
 
   constructor(private artistApi: ArtistApi, public deptService: DepartmentService) {
   }
@@ -45,6 +45,7 @@ export class ArtistService {
           this.arrayDept = departments;
 
           artists.forEach((a: Artist) => {
+            const depList = this.getDepartmentFromIds(a['allowedDepartment'])
             this.linkDeptToArtiste(a, departments);
           });
         });
@@ -55,6 +56,21 @@ export class ArtistService {
 
 
       });
+  }
+
+  getDepartmentFromIds(ids: number[]) {
+    if (this.arrayDept.length === 0) {
+      return null ;
+    }
+    const allowDept: Department[] = [];
+
+      ids.forEach(id => {
+        const jsonDept = this.arrayDept[id - 1];
+        console.log(jsonDept);
+        allowDept.push(new Department(null, null, null));
+    });
+      console.log(allowDept);
+      return allowDept;
   }
 
   linkDeptToArtiste(artist: Artist, dept: Department[]) {
