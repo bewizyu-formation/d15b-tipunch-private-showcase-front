@@ -36,7 +36,7 @@ export class SigninContainerComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private userService: UserService, private artistService: ArtistService) {
     // Initializing controls for form fields
-    this.loginCtrl = fb.control('', [Validators.required/*, validateLoginNotTaken(this.userService)*/]);
+    this.loginCtrl = fb.control('', [Validators.required], validateLoginNotTaken(this.userService));
     this.passwordCtrl = fb.control('',
       [Validators.required, Validators.pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'))]);
     this.confirmPasswordCtrl = fb.control('', [Validators.required]);
