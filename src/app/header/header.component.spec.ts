@@ -18,7 +18,6 @@ describe('HeaderComponent', () => {
         RouterTestingModule,
         ReactiveFormsModule,
         MatMenuModule,
-        RouterTestingModule,
         BrowserAnimationsModule,
         MatIconModule,
       ],

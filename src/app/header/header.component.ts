@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class HeaderComponent implements OnInit {
 
   title = 'Private ShowCase';
-  
+
   public title$: Observable<string> = this.headerService.changeEmitted$;
   constructor(public headerService: HeaderService,  private cookieService: CookieService) { }
 
