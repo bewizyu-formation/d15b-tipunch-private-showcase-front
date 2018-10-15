@@ -23,7 +23,7 @@ export class SigninContainerComponent implements OnInit {
   emailCtrl: FormControl;
   cityCtrl: FormControl;
   artistNameCtrl: FormControl;
-  descriptionCtrl: FormControl;
+  shortDescriptionCtrl: FormControl;
 
   // Field variables to add user/artist
   newUser: User;
@@ -43,7 +43,7 @@ export class SigninContainerComponent implements OnInit {
     this.emailCtrl = fb.control('', [Validators.required, Validators.email]);
     this.cityCtrl = fb.control('', [Validators.required]);
     this.artistNameCtrl = fb.control('');
-    this.descriptionCtrl = fb.control('');
+    this.shortDescriptionCtrl = fb.control('');
 
     // Initializing form group control
     this.signinForm = fb.group({
@@ -53,22 +53,23 @@ export class SigninContainerComponent implements OnInit {
       'email': this.emailCtrl,
       'city': this.cityCtrl,
       'artistName': this.artistNameCtrl,
-      'description': this.descriptionCtrl
+      'shortDescription': this.shortDescriptionCtrl
     }, {validator: checkPasswords});
 
     // Initializing objects to add
     this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
     this.newArtist = new Artist(undefined,
-                                  this.loginCtrl.value,
-                                  this.passwordCtrl.value,
-                                  this.emailCtrl.value,
-                                  this.cityCtrl.value,
-                                  this.artistNameCtrl.value,
-                                  this.descriptionCtrl.value,
-                                  undefined,
-                                  this.emailCtrl.value,
-                                  undefined,
-                                  undefined);
+      this.loginCtrl.value,
+      this.passwordCtrl.value,
+      this.emailCtrl.value,
+      this.cityCtrl.value,
+      this.artistNameCtrl.value,
+      this.shortDescriptionCtrl.value,
+      undefined,
+      this.emailCtrl.value,
+      undefined,
+      undefined,
+      null);
   }
 
   ngOnInit() {
@@ -99,16 +100,17 @@ export class SigninContainerComponent implements OnInit {
         this.loginCtrl.value,
         this.passwordCtrl.value,
         this.emailCtrl.value,
-        1,
+        this.cityCtrl.value,
         this.artistNameCtrl.value,
-        this.descriptionCtrl.value,
+        this.shortDescriptionCtrl.value,
         undefined,
         this.emailCtrl.value,
         undefined,
-        undefined);
+        undefined,
+      null);
       this.artistService.save(this.newArtist);
     } else {
-      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, 1);
+      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
       this.userService.save(this.newUser);
     }
   }
@@ -118,15 +120,15 @@ export class SigninContainerComponent implements OnInit {
    */
   onCheckboxChange(isArtist: boolean) {
     if (isArtist) {
-      this.descriptionCtrl.setValidators([Validators.required, Validators.maxLength(200)]);
-      this.descriptionCtrl.updateValueAndValidity();
+      this.shortDescriptionCtrl.setValidators([Validators.required, Validators.maxLength(200)]);
+      this.shortDescriptionCtrl.updateValueAndValidity();
       this.artistNameCtrl.setValidators([Validators.required]);
       this.artistNameCtrl.updateValueAndValidity();
     } else {
       this.artistNameCtrl.clearValidators();
-      this.descriptionCtrl.clearValidators();
+      this.shortDescriptionCtrl.clearValidators();
       this.artistNameCtrl.reset('');
-      this.descriptionCtrl.reset('');
+      this.shortDescriptionCtrl.reset('');
     }
   }
 
