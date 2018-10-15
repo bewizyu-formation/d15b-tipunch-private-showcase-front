@@ -10,21 +10,21 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HeaderComponent implements OnInit {
 
-  title:string = "Private ShowCase";
-  public title$: Observable<string> = this.headerService.changeEmitted$;//= new BehaviorSubject<string>("Private ShowCase");
-  constructor(private headerService:HeaderService,  private cookieService: CookieService) { }
+  title = 'Private ShowCase';
+  public title$: Observable<string> = this.headerService.changeEmitted$; // = new BehaviorSubject<string>("Private ShowCase");
+  constructor(private headerService: HeaderService,  private cookieService: CookieService) { }
 
   ngOnInit() {
     this.title$.subscribe(v => this.title = v);
   }
 
-  isLogged(){
+  isLogged() {
     return this.cookieService.check('tokenUser');
   }
 
-  logout(){
-    console.log("LOGOUT FUNCTION SHOULD BE DEV");
-    //NETWORK CALL ON /LOGOUT
-    //CLEAN userToken COOKIE
+  logout() {
+    console.log('LOGOUT FUNCTION SHOULD BE DEV');
+    // NETWORK CALL ON /LOGOUT
+    // CLEAN userToken COOKIE
   }
 }

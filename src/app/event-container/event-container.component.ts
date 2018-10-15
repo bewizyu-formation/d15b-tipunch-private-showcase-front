@@ -8,7 +8,7 @@ import { HeaderService } from '../service/HeaderService';
 })
 export class EventContainerComponent implements OnInit {
 
-  constructor(private headerService:HeaderService) { }
+  constructor(private headerService: HeaderService) { }
 
   ngOnInit() {
     this.headerService.emitChange('Evenements', 'event');

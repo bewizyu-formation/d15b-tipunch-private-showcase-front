@@ -8,9 +8,9 @@ import { HeaderService } from '../service/HeaderService';
 })
 export class HomepageContainerComponent implements OnInit {
 
-  constructor(private headerService:HeaderService) { }
+  constructor(private headerService: HeaderService) { }
 
   ngOnInit() {
-    this.headerService.emitChange("Private ShowCase", 'homepage');
+    this.headerService.emitChange('Private ShowCase', 'homepage');
   }
 }
