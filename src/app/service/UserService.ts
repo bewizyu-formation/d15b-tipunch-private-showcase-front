@@ -58,8 +58,11 @@ export class UserService {
   }
 
   checkLoginNotTaken(login: string) {
+    console.log(login)
     return this.userApi.findAll().pipe(
-      map((users: User[]) => users.filter(u => u.login === login)),
+      map((users: User[]) => {
+          users.filter(u => u.login.toLowerCase() === login.toLowerCase());
+      }),
       map((users: User[]) => !users.length)) ;
   }
 }
