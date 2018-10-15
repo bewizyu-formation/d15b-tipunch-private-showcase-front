@@ -31,3 +31,7 @@
 a:hover{
   color: dodgerblue;
 }
+
+.container__icon{
+  color: white;
+}

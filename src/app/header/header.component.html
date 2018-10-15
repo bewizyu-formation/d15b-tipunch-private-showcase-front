@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="" *ngIf="title === 'Artistes dans votre département'">
+  <div *ngIf="this.headerService.isHome">
       <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>menu</mat-icon>
+          <mat-icon class="container__icon">menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item
@@ -10,7 +10,7 @@
             <span>Accueil</span>
           </button>
           <button mat-menu-item
-          [routerLink]="['/home/events']">
+          [routerLink]="['/events']">
             <mat-icon>send</mat-icon>
             <span>Evenements</span>
           </button>
@@ -19,6 +19,12 @@
             <span>Contacts</span>
           </button>
         </mat-menu>
+  </div>
+  <div *ngIf="this.headerService.isEvent">
+      <button mat-icon-button
+      [routerLink]="['/home']">
+        <mat-icon class="container__icon">arrow_back</mat-icon>
+      </button>
   </div>
   <div class="container__box"></div>
   <h1>{{title}}</h1>
@@ -34,9 +40,9 @@
       <p> Vous êtes connecté !</p>
     </div>
   </div>
-  <div class="" *ngIf="title === 'Artistes dans votre département'">
+  <div *ngIf="this.headerService.isHome">
       <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
+          <mat-icon class="container__icon">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item
@@ -44,8 +50,7 @@
             <mat-icon>music_note</mat-icon>
             <span>Artistes</span>
           </button>
-          <button mat-menu-item
-          (click) = navigateToProfile()>
+          <button mat-menu-item>
             <mat-icon>settings</mat-icon>
             <span>Profil</span>
           </button>

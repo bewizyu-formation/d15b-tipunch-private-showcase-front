@@ -8,8 +8,24 @@ export class HeaderService{
     private emitChangeSource = new Subject<string>();
     
     changeEmitted$ = this.emitChangeSource.asObservable();
-
-    emitChange(value:string) {
+    isHome: boolean = false;
+    isEvent: boolean = false;
+    
+    emitChange(value:string, route:string) {
         this.emitChangeSource.next(value);
+        switch(route){
+            case 'home':
+                this.isHome = true;
+                this.isEvent = false;
+                break;
+            case 'event':
+                this.isHome = false;
+                this.isEvent = true;
+                break;
+            case 'homepage':
+                this.isHome = false;
+                this.isEvent = false;
+                break;
+        }
     }
 }

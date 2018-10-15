@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from '../service/HeaderService';
 
 @Component({
   selector: 'app-event-container',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headerService:HeaderService) { }
 
   ngOnInit() {
+    this.headerService.emitChange('Evenements', 'event');
   }
 
 }

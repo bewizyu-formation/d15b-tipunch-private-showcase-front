@@ -22,10 +22,9 @@ export class HeaderComponent implements OnInit {
     return this.cookieService.check('tokenUser');
   }
 
-  navigateToProfile(){
-    console.log("NAVIGATE TO PROFILE FUNCTION SHOULD BE DEV");
-  }
   logout(){
     console.log("LOGOUT FUNCTION SHOULD BE DEV");
+    //NETWORK CALL ON /LOGOUT
+    //CLEAN userToken COOKIE
   }
 }

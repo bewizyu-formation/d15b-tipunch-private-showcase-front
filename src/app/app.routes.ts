@@ -22,12 +22,8 @@ export const ROUTES: Routes = [
     { path: PATH_HOMEPAGE, component: HomepageContainerComponent },
     { path: PATH_SIGNIN, component: SigninContainerComponent },
     { path: PATH_LOGIN, component: LoginContainerComponent },
-    { path: PATH_HOME,
-        component: HomeContainerComponent,
-        children: [
-            {path: PATH_HOME_USERS, component: UsersContainerComponent},
-            {path: PATH_HOME_ARTISTS, component: ArtistsContainerComponent},
-            {path: PATH_HOME_EVENT, component: EventContainerComponent},
-        ]
-    },
+    { path: PATH_HOME, component: HomeContainerComponent},
+    {path: PATH_HOME_USERS, component: UsersContainerComponent},
+    {path: PATH_HOME_ARTISTS, component: ArtistsContainerComponent},
+    {path: PATH_HOME_EVENT, component: EventContainerComponent},
   ];

@@ -11,6 +11,6 @@ export class HomepageContainerComponent implements OnInit {
   constructor(private headerService:HeaderService) { }
 
   ngOnInit() {
-    this.headerService.emitChange("Private ShowCase");
+    this.headerService.emitChange("Private ShowCase", 'homepage');
   }
 }

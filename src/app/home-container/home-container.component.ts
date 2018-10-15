@@ -21,6 +21,7 @@ export class HomeContainerComponent implements OnInit {
     this.artistService.findAllByDeptId(44);
     this.artistService.findById(10);
     this.artists = from(this.artistService.getArtists$);
+    this.headerService.emitChange('Artistes dans votre département', 'home');
     this.artist = from(this.artistService.getArtist$);
     console.log(this.artists);
     console.log(this.artist);
