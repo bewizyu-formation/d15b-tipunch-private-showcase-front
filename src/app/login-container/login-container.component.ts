@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { LoginService } from '../service/LoginService';
-import {Router} from '@angular/router';
+import {LoginService} from '../service/LoginService';
 
 @Component({
   selector: 'app-login-container',
@@ -28,7 +27,6 @@ export class LoginContainerComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
     const login: string = this.loginForm.value.login;
     const password: string = this.loginForm.value.password;
     this.loginService.login(login, password);

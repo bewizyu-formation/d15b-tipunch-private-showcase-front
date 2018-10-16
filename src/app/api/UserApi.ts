@@ -5,7 +5,6 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {CityApi} from './CityApi';
-import {City} from '../model/City';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -29,7 +28,12 @@ export class UserApi {
   }
 
   save(user: User) {
-    return this.http.post(`${environment.API_BASE_URL}${USERS_URL}`, user);
+    return this.http.post(`${environment.API_BASE_URL}${USERS_URL}`, {
+      login: user.login,
+      password: user.password,
+      email: user.email,
+      city: user.city.id
+    });
   }
 
   findAll() {
@@ -41,7 +45,12 @@ export class UserApi {
   }
 
   update(user: User) {
-    return this.http.put(`${environment.API_BASE_URL}${USERS_URL}${user.id}`, user);
+    return this.http.put(`${environment.API_BASE_URL}${USERS_URL}${user.id}`, {
+      login: user.login,
+      password: user.password,
+      email: user.email,
+      city: user.city.id
+    });
   }
 
   delete(user: User) {

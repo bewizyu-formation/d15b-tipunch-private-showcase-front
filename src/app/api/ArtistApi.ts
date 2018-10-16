@@ -8,14 +8,23 @@ const ARTIST_URL = 'artists/';
 const DEPARTMENT_URL = 'department/';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ArtistApi {
 
-  constructor(private http: HttpClient, private cookieService: CookieService ) {
+  constructor(private http: HttpClient, private cookieService: CookieService) {
   }
-  save(artist: Artist)  {
-    return this.http.post(`${environment.API_BASE_URL}${ARTIST_URL}`, artist);
+
+  save(artist: Artist) {
+    return this.http.post(`${environment.API_BASE_URL}${ARTIST_URL}`, {
+      login: artist.login,
+      password: artist.password,
+      email: artist.email,
+      city: artist.city.id,
+      artistName: artist.artistName,
+      shortDescription: artist.shortDescription,
+      artistEmail: artist.artistEmail,
+    });
   }
 
   findAll() {
@@ -31,7 +40,15 @@ export class ArtistApi {
   }
 
   update(artist: Artist) {
-    return this.http.put(`${environment.API_BASE_URL}${ARTIST_URL}${artist.id}`, artist);
+    return this.http.put(`${environment.API_BASE_URL}${ARTIST_URL}${artist.id}`, {
+      login: artist.login,
+      password: artist.password,
+      email: artist.email,
+      city: artist.city.id,
+      artistName: artist.artistName,
+      shortDescription: artist.shortDescription,
+      artistEmail: artist.artistEmail,
+    });
   }
 
   delete(artist: Artist) {
