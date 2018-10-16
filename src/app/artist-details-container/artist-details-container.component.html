@@ -1,3 +1,99 @@
-<p>
-  artist-details-container works!
-</p>
+<div class="artistContainer" *ngIf="isOwner; else notOwner">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="summaryBlock">
+      <h2 class="blockTitle">Présentation</h2>
+      <div class="blockContent">
+        <img class="imgArtist" src="../../assets/img/guitar.jpg" alt="guitariste">
+        <div class="descriptionContainer">
+          <div class="form__field">
+            <mat-form-field>
+              <input matInput formControlName="artistName" value='{{ (artist$| async)?.artistName }}'>
+            </mat-form-field>
+          </div>
+          <div class="form__field">
+            <mat-form-field>
+              <input matInput formControlName="shortDescription" value='{{ (artist$| async)?.shortDescription }}'>
+            </mat-form-field>
+          </div>
+          <div class="form__field">
+            <mat-form-field>
+              <input matInput formControlName="longDescription" value='{{ (artist$| async)?.longDescription }}'>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="grade"></div>
+      </div>
+    </div>
+    <div class="infoBlock">
+      <h2 class="blockTitle">Informations générales</h2>
+      <div class="blockContent">
+        <div class="form__field">
+          <mat-form-field>
+            <input matInput formControlName="website" value='{{ (artist$| async)?.website }}'>
+          </mat-form-field>
+        </div>
+        <div class="form__field">
+          <mat-form-field>
+            <input matInput formControlName="phone" value='{{ (artist$| async)?.phone }}'>
+          </mat-form-field>
+        </div>
+        <div class="form__field">
+          <mat-form-field>
+            <input matInput formControlName="artistEmail" value='{{ (artist$| async)?.artistEmail }}'>
+          </mat-form-field>
+        </div>
+        <div class="form__field">
+          <mat-form-field>
+            <input matInput formControlName="address" value='{{ (artist$| async)?.address }}'>
+          </mat-form-field>
+        </div>
+
+        <div class="blockDepartments">
+          <p>Départements acceptés</p>
+          <div *ngFor="let dept of (artist$| async)?.departments">
+            <li>{{dept.name}} ({{dept.code}})</li>
+          </div>
+        </div>
+
+        <div class="form__buttons">
+          <button mat-stroked-button type="submit" class="form__buttons_item"> Valider </button>
+          <button mat-stroked-button class="form__buttons_item" [routerLink]="['/home']"> Annuler </button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+<!-- NOT OWNER -->
+<ng-template #notOwner>
+  <div class="artistContainer">
+    <div class="summaryBlock">
+      <h2 class="blockTitle">Présentation</h2>
+      <div class="blockContent">
+        <img class="imgArtist" src="../../assets/img/guitar.jpg" alt="guitariste">
+        <div class="descriptionContainer">
+          <h3 class="artistName">{{ (artist$| async).artistName }}</h3>
+          <p class="shortDescription">{{ (artist$| async).shortDescription }}</p>
+          <p class="longDescription">{{ (artist$| async).longDescription }}</p>
+        </div>
+        <div class="grade"></div>
+      </div>
+    </div>
+    <div class="infoBlock">
+      <h2 class="blockTitle">Informations générales</h2>
+      <div class="blockContent">
+        <p class="txtInfo">{{ (artist$| async).website }}</p>
+        <p class="txtInfo">{{ (artist$| async).phone }}</p>
+        <p class="txtInfo">{{ (artist$| async).address }}</p>
+      </div>
+      <div class="blockContent">
+        <p>Départements acceptés</p>
+        <div *ngFor="let dept of (artist$| async).departments">
+          <li>{{dept.name}} ({{dept.code}})</li>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+

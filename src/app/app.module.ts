@@ -7,7 +7,6 @@ import {SigninContainerComponent} from './signin-container/signin-container.comp
 import {LoginContainerComponent} from './login-container/login-container.component';
 import {HomeContainerComponent} from './home-container/home-container.component';
 import {UsersContainerComponent} from './users-container/users-container.component';
-import {ArtistsContainerComponent} from './artists-container/artists-container.component';
 
 import {ROUTES} from './app.routes';
 import {RouterModule} from '@angular/router';
@@ -31,7 +30,6 @@ import { BookerContainerComponent } from './booker-container/booker-container.co
     LoginContainerComponent,
     HomeContainerComponent,
     UsersContainerComponent,
-    ArtistsContainerComponent,
     HeaderComponent,
     EventContainerComponent,
     BookerContainerComponent,

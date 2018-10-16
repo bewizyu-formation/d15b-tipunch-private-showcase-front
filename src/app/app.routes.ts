@@ -4,9 +4,9 @@ import {SigninContainerComponent} from './signin-container/signin-container.comp
 import {LoginContainerComponent} from './login-container/login-container.component';
 import {HomeContainerComponent} from './home-container/home-container.component';
 import {UsersContainerComponent} from './users-container/users-container.component';
-import {ArtistsContainerComponent} from './artists-container/artists-container.component';
-import {UserResolver} from './UserResolver';
 import {EventContainerComponent} from './event-container/event-container.component';
+import {ArtistDetailsContainerComponent} from './artist-details-container/artist-details-container.component';
+import {UserResolver} from './UserResolver';
 import {BookerContainerComponent} from './booker-container/booker-container.component';
 
 export const PATH_HOMEPAGE = '';
@@ -25,7 +25,7 @@ export const ROUTES: Routes = [
   {path: PATH_SIGNIN, component: SigninContainerComponent},
   {path: PATH_LOGIN, component: LoginContainerComponent},
   {path: PATH_HOME_USERS, component: UsersContainerComponent},
-  {path: PATH_HOME_ARTISTS, component: ArtistsContainerComponent},
+  {path: PATH_HOME_ARTISTS, component: ArtistDetailsContainerComponent, resolve: {user: UserResolver}},
   {
     path: PATH_HOME_EVENT, component: EventContainerComponent,
     resolve: {

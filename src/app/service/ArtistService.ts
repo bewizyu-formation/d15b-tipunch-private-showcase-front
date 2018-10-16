@@ -43,7 +43,6 @@ export class ArtistService {
           const depListJson = this.getDepartmentFromIds(artist['allowedDepartment']);
           const newArtist: Artist = this.getArtistFromJson(artist);
           newArtist.departments = depListJson;
-          console.log(artist);
           this.cityService.findById(artist['city']).subscribe(
             (cityjson: City) => {
               const city = new City(cityjson.id, cityjson.departmentCode, cityjson.name);
@@ -97,7 +96,7 @@ export class ArtistService {
       a['id'], a['login'], a['password'], a['email'],
       null, a['artistName'], a['shortDescription'],
       a['longDescription'], a['website'], a['artistEmail'],
-      null , a['picture']);
+      null , a['picture'], a['address'], a['phoneNumber']);
   }
 
   update(artist: Artist) {
