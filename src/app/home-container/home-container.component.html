@@ -1,5 +1,5 @@
 <div class="flex-container">
-  <div class="container__card" *ngFor="let artist of artists$">
+  <div class="container__card" *ngFor="let artist of artists$ | async">
       <img src="../../assets/img/guitar.jpg" alt="{{artist.artistName}}">
     <div class="card__informations">
       <h4>{{artist.artistName | uppercase}}</h4>
