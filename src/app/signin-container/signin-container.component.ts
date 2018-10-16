@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, startWith} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
 import {UserService} from '../service/UserService';
-import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
 import {ArtistService} from '../service/ArtistService';
 import {User} from '../model/User';
 import {Artist} from '../model/Artist';

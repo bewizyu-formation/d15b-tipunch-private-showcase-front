@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ArtistService} from '../service/ArtistService';
 import { HeaderService } from '../service/HeaderService';
 import {Artist} from '../model/Artist';
+import {UserService} from '../service/UserService';
+import {User} from '../model/User';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -12,20 +15,22 @@ import {Artist} from '../model/Artist';
 })
 export class HomeContainerComponent implements OnInit {
   artists$: Observable<Artist[]> = new Observable<Artist[]>();
-  artist$: Observable<Artist> = new Observable<Artist>();
+  currentUser$: Observable<User>;
 
   constructor(private artistService: ArtistService, private headerService: HeaderService) {
   }
 
   ngOnInit() {
-    this.artistService.findAllByDeptId(44);
-    this.artistService.findById(10);
-    this.artists$ = from(this.artistService.getArtists$);
-    this.artist$ = from(this.artistService.getArtist$);
-    console.log(this.artists$);
-    console.log(this.artist$);
-
-
+    // Getting artists related to user department code
+    this.activatedRoute.data.subscribe((data) => {
+      this.currentUser$ = data.user;
+      this.currentUser$.subscribe(user => {
+        console.log(user);
+        this.artistService.findAllByDeptCode(user.city.departmentCode).subscribe(artists => {
+          this.artists$ = of([...artists]);
+        });
+      });
+    });
     this.headerService.emitChange('Artistes dans votre département', 'home');
   }
 }
