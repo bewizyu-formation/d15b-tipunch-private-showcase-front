@@ -6,6 +6,8 @@ import {DepartmentService} from './DepartmentService';
 import {Department} from '../model/Department';
 import {CityService} from './CityService';
 import {City} from '../model/City';
+import {tap} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +55,10 @@ export class ArtistService {
     );
   }
 
-  findAllByDeptId(id: number) {
-    return this.artistApi.findAllByDeptId(id).subscribe(
-      (artists: Artist[]) => {
-        this.mapArtistWithDepartment(artists);
-      });
+  findAllByDeptCode(deptCode: string) {
+    return this.artistApi.findAllByDeptCode(deptCode).pipe(
+      tap((artists: Artist[]) => this.artists$.next(artists))
+    );
   }
 
   mapArtistWithDepartment(artists: Artist[]) {

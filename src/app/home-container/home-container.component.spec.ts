@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeContainerComponent } from './home-container.component';
 import {MaterialConfigModule} from '../material-config/material-config.module';
 import {HttpClientTestingModule} from '../../../node_modules/@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import {CookieService} from 'ngx-cookie-service';
 
 describe('HomeContainerComponent', () => {
   let component: HomeContainerComponent;
@@ -11,7 +13,12 @@ describe('HomeContainerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeContainerComponent ],
-      imports: [HttpClientTestingModule, MaterialConfigModule]
+      imports: [
+        HttpClientTestingModule,
+        MaterialConfigModule,
+        RouterTestingModule,
+      ],
+      providers: [CookieService]
     })
     .compileComponents();
   }));
