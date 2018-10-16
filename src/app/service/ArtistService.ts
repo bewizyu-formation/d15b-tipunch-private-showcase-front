@@ -37,13 +37,14 @@ export class ArtistService {
 
   findById(id: number) {
     return this.artistApi.findById(id).subscribe(
-      (artist: Artist) => {
+      (artist: Object) => {
         this.deptService.findAll().subscribe((departments: Department[]) => {
           this.arrayDept = departments;
           const depListJson = this.getDepartmentFromIds(artist['allowedDepartment']);
           const newArtist: Artist = this.getArtistFromJson(artist);
           newArtist.departments = depListJson;
-          this.cityService.findById(artist.id).subscribe(
+          console.log(artist);
+          this.cityService.findById(artist['city']).subscribe(
             (cityjson: City) => {
               const city = new City(cityjson.id, cityjson.departmentCode, cityjson.name);
               newArtist.city = city;
@@ -91,12 +92,12 @@ export class ArtistService {
     return allowDept;
   }
 
-  getArtistFromJson(a: Artist) {
+  getArtistFromJson(a: object) {
     return new Artist(
-      a.id, a.login, a.password,
-      a.email, null, a.artistName,
-      a.shortDescription, a.longDescription,
-      a.website, a.artistEmail, null, a.picture);
+      a['id'], a['login'], a['password'], a['email'],
+      null, a['artistName'], a['shortDescription'],
+      a['longDescription'], a['website'], a['artistEmail'],
+      null , a['picture']);
   }
 
   update(artist: Artist) {
