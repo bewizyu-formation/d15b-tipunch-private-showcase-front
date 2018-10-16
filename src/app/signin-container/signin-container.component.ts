@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, startWith, tap} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
 import {UserService} from '../service/UserService';
 import {ArtistService} from '../service/ArtistService';
@@ -77,7 +77,8 @@ export class SigninContainerComponent implements OnInit {
     this.filteredCities = this.cityCtrl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => this._filter(value)),
+        tap(() => console.log('cityCtrl '+this.cityCtrl.value))
       );
 
     // Mocks for tests purposes

@@ -24,8 +24,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    console.log('LOGOUT FUNCTION SHOULD BE DEV');
     // NETWORK CALL ON /LOGOUT
+
     // CLEAN userToken COOKIE
+    this.cookieService.deleteAll();
   }
 }

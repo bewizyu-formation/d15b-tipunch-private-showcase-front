@@ -74,9 +74,9 @@
 
   <div *ngIf="isArtist">
     <mat-form-field>
-      <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      <textarea matInput placeholder="Description" formControlName="shortDescription"></textarea>
       <mat-error
-        *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">
+        *ngIf="shortDescriptionCtrl.dirty && shortDescriptionCtrl.hasError('required')">
         Champs requis
       </mat-error>
     </mat-form-field>
