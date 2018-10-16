@@ -1,11 +1,65 @@
 <div class="container">
+  <div *ngIf="this.headerService.isHome">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon class="container__icon">menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item
+          [routerLink]="['/home']">
+            <mat-icon>home</mat-icon>
+            <span>Accueil</span>
+          </button>
+          <button mat-menu-item
+          [routerLink]="['/events']">
+            <mat-icon>send</mat-icon>
+            <span>Evenements</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>group</mat-icon>
+            <span>Contacts</span>
+          </button>
+        </mat-menu>
+  </div>
+  <div *ngIf="this.headerService.isEvent">
+      <button mat-icon-button
+      [routerLink]="['/home']">
+        <mat-icon class="container__icon">arrow_back</mat-icon>
+      </button>
+  </div>
   <div class="container__box"></div>
-  <h1>Private ShowCase</h1>
+  <h1>{{title}}</h1>
   <div class="container__box">
-    <a href=""
-    [routerLink]="['/login']">Se connecter</a>
-    <p class="container__separator">|</p>
-    <a href=""
-    [routerLink]="['/signin']">S'inscrire</a>
+    <div *ngIf="isLogged() === false">
+      <a class="container__text" href=""
+      [routerLink]="['/login']">Se connecter</a>
+      <p class="container__separator">|</p>
+      <a class="container__text" href=""
+      [routerLink]="['/signin']">S'inscrire</a>
+    </div>
+    <div class="container__text" *ngIf="isLogged() === true">
+      <p> Vous êtes connecté !</p>
+    </div>
+  </div>
+  <div *ngIf="this.headerService.isHome">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon class="container__icon">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item
+          [routerLink]="['/home']">
+            <mat-icon>music_note</mat-icon>
+            <span>Artistes</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Profil</span>
+          </button>
+          <button mat-menu-item
+          (click) = logout()
+          [routerLink]="['/']">
+            <mat-icon>logout</mat-icon>
+            <span>Deconnexion</span>
+          </button>
+        </mat-menu>
   </div>
 </div>

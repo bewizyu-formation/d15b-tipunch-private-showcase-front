@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
+import { HeaderService } from '../service/HeaderService';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  title = 'Private ShowCase';
+
+  public title$: Observable<string> = this.headerService.changeEmitted$;
+  constructor(public headerService: HeaderService,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.title$.subscribe(v => this.title = v);
   }
 
+  isLogged() {
+    return this.cookieService.check('tokenUser');
+  }
+
+  logout() {
+    console.log('LOGOUT FUNCTION SHOULD BE DEV');
+    // NETWORK CALL ON /LOGOUT
+    // CLEAN userToken COOKIE
+  }
 }

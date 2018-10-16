@@ -2,6 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HeaderComponent} from './header/header.component';
+import { MaterialConfigModule } from './material-config/material-config.module';
+import { CookieService } from 'ngx-cookie-service';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -9,7 +11,10 @@ describe('AppComponent', () => {
         AppComponent,
         HeaderComponent
       ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, MaterialConfigModule],
+      providers: [
+        CookieService
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
