@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 const CITY_URL = 'citys/';
-
+const CITY_STARTSWITH_URL = 'citys/startsWith/';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,5 +27,9 @@ export class CityApi {
     return this.http.get(`${environment.API_BASE_URL}${CITY_URL}${id}`).pipe(
       map(city => this.getCityFromJson(city))
     );
+  }
+
+  findAllStartsWith(start: string) {
+    return this.http.get(`${environment.API_BASE_URL}${CITY_STARTSWITH_URL}${start}`);
   }
 }

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
 import {UserService} from '../service/UserService';
 import {ArtistService} from '../service/ArtistService';
@@ -9,6 +7,9 @@ import {User} from '../model/User';
 import {Artist} from '../model/Artist';
 import {City} from '../model/City';
 import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
+import {CityService} from '../service/CityService';
+import {debounceTime} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signin-container',
@@ -31,11 +32,12 @@ export class SigninContainerComponent implements OnInit {
   newArtist: Artist;
 
   // Datas
-  filteredCities: Observable<string[]>;
-  cities: string[];
+  filteredCities$ = this.cityService.cities$;
+  city: City;
   isArtist = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private artistService: ArtistService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private artistService: ArtistService,
+              private cityService: CityService, private router: Router) {
     // Initializing controls for form fields
     this.loginCtrl = fb.control('', [Validators.required], validateLoginNotTaken(this.userService));
     this.passwordCtrl = fb.control('',
@@ -74,25 +76,19 @@ export class SigninContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filteredCities = this.cityCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    this.cityCtrl.valueChanges.pipe(
+      debounceTime(800)
+    ).subscribe((value) => {
+      if (value.length > 1) {
+        this.cityService.findAllStartsWith(value);
+      } else {
+        this.filteredCities$.next([]);
+      }
+    });
+  }
 
-    // Mocks for tests purposes
-    this.cities = [
-      'Lyon',
-      'Palaiseau',
-      'Marseille',
-      'Montpellier',
-      'Bordeaux',
-      'Nice',
-      'Nîmes',
-      'Paris',
-      'Montluçon',
-      'Moncuq'
-    ];
+  handleCitySelection(city: City) {
+    this.city = city;
   }
 
   onSubmit() {
@@ -101,18 +97,20 @@ export class SigninContainerComponent implements OnInit {
         this.loginCtrl.value,
         this.passwordCtrl.value,
         this.emailCtrl.value,
-        new City(1, '1', ''),
+        this.city,
         this.artistNameCtrl.value,
         this.shortDescriptionCtrl.value,
         undefined,
         this.emailCtrl.value,
         undefined,
         undefined,
-      null);
+        null);
       this.artistService.save(this.newArtist);
+      this.router.navigate(['login']);
     } else {
-      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, new City(1, '1', ''));
+      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.city);
       this.userService.save(this.newUser);
+      this.router.navigate(['login']);
     }
   }
 
@@ -131,14 +129,5 @@ export class SigninContainerComponent implements OnInit {
       this.artistNameCtrl.reset('');
       this.shortDescriptionCtrl.reset('');
     }
-  }
-
-  /**
-   * @description Filter values of autocomplete field
-   */
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.cities.filter(city => city.toLowerCase().startsWith(filterValue));
   }
 }
