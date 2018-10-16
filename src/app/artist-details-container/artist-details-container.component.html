@@ -72,9 +72,9 @@
       <div class="blockContent">
         <img class="imgArtist" src="../../assets/img/guitar.jpg" alt="guitariste">
         <div class="descriptionContainer">
-          <h3 class="artistName">{{ (artist$| async).artistName }}</h3>
-          <p class="shortDescription">{{ (artist$| async).shortDescription }}</p>
-          <p class="longDescription">{{ (artist$| async).longDescription }}</p>
+          <h3 class="artistName">{{ (artist$| async)?.artistName }}</h3>
+          <p class="shortDescription">{{ (artist$| async)?.shortDescription }}</p>
+          <p class="longDescription">{{ (artist$| async)?.longDescription }}</p>
         </div>
         <div class="grade"></div>
       </div>
@@ -82,13 +82,13 @@
     <div class="infoBlock">
       <h2 class="blockTitle">Informations générales</h2>
       <div class="blockContent">
-        <p class="txtInfo">{{ (artist$| async).website }}</p>
-        <p class="txtInfo">{{ (artist$| async).phone }}</p>
-        <p class="txtInfo">{{ (artist$| async).address }}</p>
+        <p class="txtInfo">{{ (artist$| async)?.website }}</p>
+        <p class="txtInfo">{{ (artist$| async)?.phone }}</p>
+        <p class="txtInfo">{{ (artist$| async)?.address }}</p>
       </div>
       <div class="blockContent">
         <p>Départements acceptés</p>
-        <div *ngFor="let dept of (artist$| async).departments">
+        <div *ngFor="let dept of (artist$| async)?.departments">
           <li>{{dept.name}} ({{dept.code}})</li>
         </div>
       </div>

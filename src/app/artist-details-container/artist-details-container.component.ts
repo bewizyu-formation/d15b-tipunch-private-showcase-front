@@ -32,6 +32,15 @@ export class ArtistDetailsContainerComponent implements OnInit {
   constructor(private fb: FormBuilder, private headerService: HeaderService,
               private artistService: ArtistService, private activeRoute: ActivatedRoute) {
 
+    this.artistNameCtrl = fb.control('');
+    this.shortDescriptionCtrl = fb.control('');
+    this.longDescriptionCtrl = fb.control('');
+    this.websiteCtrl = fb.control('');
+    this.phoneCtrl = fb.control('');
+    this.artistEmailCtrl = fb.control('');
+    this.addressCtrl = fb.control('');
+    // this.departmentsCtrl = fb.control('');
+
     this.updateForm = fb.group({
       'artistName': this.artistNameCtrl,
       'shortDescription': this.shortDescriptionCtrl,
@@ -71,7 +80,7 @@ export class ArtistDetailsContainerComponent implements OnInit {
     this.currentArtist.artistEmail = this.artistEmailCtrl.value;
     this.currentArtist.phone = this.phoneCtrl.value;
     this.currentArtist.address = this.addressCtrl.value;
-    this.currentArtist.departments = this.departmentsCtrl.value;
+    // this.currentArtist.departments = this.departmentsCtrl.value;
     console.log('after');
     console.log(this.currentArtist);
     this.artistService.update(this.currentArtist);
