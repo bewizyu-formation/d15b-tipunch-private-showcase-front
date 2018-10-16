@@ -14,10 +14,12 @@ export class LoginService {
         this.loginApi.login(login, password)
             .subscribe((resp) => {
               this.storeJwtInCookie(resp.headers);
-            });
-        if (login === 'user' && password === 'user') {
-          this.router.navigate(['home']);
-        }
+              // Redirection to home on success
+              this.router.navigate(['home']);
+            },
+              // Redirection to login on error
+              () => this.router.navigate(['login'])
+            );
     }
 
     private storeJwtInCookie(headers) {

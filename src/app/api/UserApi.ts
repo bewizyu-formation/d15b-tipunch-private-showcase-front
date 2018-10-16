@@ -2,18 +2,30 @@ import {Injectable} from '@angular/core';
 import {User} from '../model/User';
 import {environment} from '../../environments/environment';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import {CityApi} from './CityApi';
+import {City} from '../model/City';
+import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 
 const USERS_URL = 'users/';
+const LOGIN_URL = 'login/';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserApi {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private cityApi: CityApi) {
+  }
+
+  getUserFromJson(jsonUser: object): Observable<User> {
+    return this.cityApi.findById(jsonUser['city']).pipe(
+      map(city => new User(jsonUser['id'], jsonUser['login'], jsonUser['password'], jsonUser['email'], city))
+    );
   }
 
   save(user: User) {

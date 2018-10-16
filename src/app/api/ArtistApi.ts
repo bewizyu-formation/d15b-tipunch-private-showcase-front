@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Artist} from '../model/Artist';
 import {HttpClient} from '../../../node_modules/@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {CookieService} from 'ngx-cookie-service';
 
 const ARTIST_URL = 'artists/';
 const DEPARTMENT_URL = 'department/';
@@ -12,7 +12,7 @@ const DEPARTMENT_URL = 'department/';
 })
 export class ArtistApi {
 
-  constructor(private http: HttpClient ) {
+  constructor(private http: HttpClient, private cookieService: CookieService ) {
   }
   save(artist: Artist)  {
     return this.http.post(`${environment.API_BASE_URL}${ARTIST_URL}`, artist);
@@ -26,8 +26,8 @@ export class ArtistApi {
     return this.http.get(`${environment.API_BASE_URL}${ARTIST_URL}${id}`);
   }
 
-  findAllByDeptId(id: number) {
-    return this.http.get(`${environment.API_BASE_URL}${ARTIST_URL}${DEPARTMENT_URL}${id}`);
+  findAllByDeptCode(deptCode: string) {
+    return this.http.get(`${environment.API_BASE_URL}${ARTIST_URL}${DEPARTMENT_URL}${deptCode}`);
   }
 
   update(artist: Artist) {

@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, startWith} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {checkPasswords} from '../validator/checkPasswords.validator';
 import {UserService} from '../service/UserService';
-import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
 import {ArtistService} from '../service/ArtistService';
 import {User} from '../model/User';
 import {Artist} from '../model/Artist';
+import {City} from '../model/City';
+import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
 
 @Component({
   selector: 'app-signin-container',
@@ -100,7 +101,7 @@ export class SigninContainerComponent implements OnInit {
         this.loginCtrl.value,
         this.passwordCtrl.value,
         this.emailCtrl.value,
-        this.cityCtrl.value,
+        new City(1, '1', ''),
         this.artistNameCtrl.value,
         this.shortDescriptionCtrl.value,
         undefined,
@@ -110,7 +111,7 @@ export class SigninContainerComponent implements OnInit {
       null);
       this.artistService.save(this.newArtist);
     } else {
-      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, this.cityCtrl.value);
+      this.newUser = new User(undefined, this.loginCtrl.value, this.passwordCtrl.value, this.emailCtrl.value, new City(1, '1', ''));
       this.userService.save(this.newUser);
     }
   }
