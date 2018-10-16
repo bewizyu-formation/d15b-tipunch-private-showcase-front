@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ArtistService} from '../service/ArtistService';
-import { HeaderService } from '../service/HeaderService';
+import {HeaderService} from '../service/HeaderService';
 import {Artist} from '../model/Artist';
-import {UserService} from '../service/UserService';
 import {User} from '../model/User';
 import {ActivatedRoute} from '@angular/router';
 
@@ -17,7 +16,7 @@ export class HomeContainerComponent implements OnInit {
   artists$: Observable<Artist[]> = new Observable<Artist[]>();
   currentUser$: Observable<User>;
 
-  constructor(private artistService: ArtistService, private headerService: HeaderService) {
+  constructor(private artistService: ArtistService, private headerService: HeaderService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {

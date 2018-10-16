@@ -8,6 +8,7 @@ import {ArtistService} from '../service/ArtistService';
 import {User} from '../model/User';
 import {Artist} from '../model/Artist';
 import {City} from '../model/City';
+import {validateLoginNotTaken} from '../validator/validateLoginNotTaken.validator';
 
 @Component({
   selector: 'app-signin-container',
