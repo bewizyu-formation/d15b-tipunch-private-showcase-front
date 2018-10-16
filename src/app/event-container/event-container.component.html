@@ -1,5 +1,17 @@
 <div class="container">
-  <p>
-    event-container works!
-  </p>
+  <div class="container__event" *ngFor="let event of events$ | async">
+    <div class="container__time">
+        <p>{{getDayNameOfDate(event.date_time) | uppercase}}</p>
+        <p>{{getDayAndMonthOfDate(event.date_time)}}</p>
+        <p>{{getTimeOfDate(event.date_time)}}</p>
+    </div>
+    <img src="../../assets/img/guitar.jpg">
+    <div class="container__informations">
+      <h2>{{event.artist.artistName}}</h2>
+      <div class="container__address">
+          <mat-icon>email</mat-icon>
+          <p>{{event.address}}</p>
+      </div>
+    </div>
+  </div>
 </div>

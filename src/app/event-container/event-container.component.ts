@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../service/HeaderService';
+import { EventService } from '../service/EventService';
 
 @Component({
   selector: 'app-event-container',
@@ -8,10 +9,27 @@ import { HeaderService } from '../service/HeaderService';
 })
 export class EventContainerComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { }
+  events$ = this.eventService.events$;
+  constructor(private headerService: HeaderService, private eventService: EventService) { }
 
   ngOnInit() {
     this.headerService.emitChange('Evenements', 'event');
+    this.eventService.findAll();
   }
 
+  getDayNameOfDate(str: string){
+    const date = new Date();
+    let options = { weekday: 'short'};
+    return date.toLocaleDateString('fr-FR', options).substring(0,3);
+  }
+
+  getDayAndMonthOfDate(str: string){
+    const date = new Date(str);
+    return `${date.getDate()} / ${date.getMonth()+1}`
+  }
+
+  getTimeOfDate(str: string){
+    const date = new Date(str);
+    return `à ${date.getHours()}h${date.getMinutes()}`
+  }
 }
