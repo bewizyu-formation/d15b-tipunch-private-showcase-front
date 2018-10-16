@@ -29,7 +29,7 @@ export class CityApi {
     );
   }
 
-  findAllStartsWith(start: string){
+  findAllStartsWith(start: string) {
     return this.http.get(`${environment.API_BASE_URL}${CITY_STARTSWITH_URL}${start}`);
   }
 }
