@@ -10,7 +10,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   constructor(private cookieService: CookieService ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('/artists') || req.url.includes('/users')) {
+    if (req.url.includes('/artists') || req.url.includes('/users') || req.url.includes('/events')) {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });

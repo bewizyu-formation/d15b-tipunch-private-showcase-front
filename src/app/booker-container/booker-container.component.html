@@ -1,0 +1,59 @@
+<div class="container">
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+    <h2>Booker un artiste !</h2>
+    <div>
+      <mat-form-field>
+        <textarea matInput placeholder="Adresse" formControlName="address"></textarea>
+      </mat-form-field>
+      <mat-error *ngIf="addressCtrl.dirty && addressCtrl.hasError('required')">
+        Une adresse est requise !
+      </mat-error>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Nombre de personnes max" formControlName="maxGuests">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+      <mat-error *ngIf="dateCtrl.dirty && dateCtrl.hasError('required')">
+        Une date est requise !
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Heure" formControlName="hour" maxlength="2" type="number" max="23" min="0">
+      </mat-form-field>
+      <mat-error *ngIf="hourCtrl.dirty && hourCtrl.hasError('pattern')">
+        Format invalide !
+      </mat-error>
+      <mat-error *ngIf="hourCtrl.dirty && hourCtrl.hasError('required')">
+        Les heures sont requises
+      </mat-error>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Minutes" formControlName="minutes" maxlength="2" type="number" max="59" min="0">
+      </mat-form-field>
+      <mat-error *ngIf="minutesCtrl.dirty && minutesCtrl.hasError('pattern')">
+        Format invalide !
+      </mat-error>
+      <mat-error *ngIf="minutesCtrl.dirty && minutesCtrl.hasError('required')">
+        Les minutes sont requises
+      </mat-error>
+    </div>
+
+    <div class="form__buttons">
+      <button mat-stroked-button type="submit" [disabled]="bookForm.invalid" class="form__buttons_item"> Valider
+      </button>
+      <button mat-stroked-button class="form__buttons_item" [routerLink]="['/home']"> Annuler</button>
+    </div>
+  </form>
+</div>
+

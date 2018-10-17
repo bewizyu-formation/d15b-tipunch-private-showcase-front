@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EventContainerComponent} from './event-container.component';
+import {BookerContainerComponent} from './booker-container.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialConfigModule} from '../material-config/material-config.module';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -8,13 +8,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 
-describe('EventContainerComponent', () => {
-  let component: EventContainerComponent;
-  let fixture: ComponentFixture<EventContainerComponent>;
+describe('BookerContainerComponent', () => {
+  let component: BookerContainerComponent;
+  let fixture: ComponentFixture<BookerContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EventContainerComponent],
+      declarations: [BookerContainerComponent, ],
       imports: [
         ReactiveFormsModule,
         MaterialConfigModule,
@@ -24,18 +24,18 @@ describe('EventContainerComponent', () => {
       ],
       providers: [
         CookieService,
-      ]
+      ],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventContainerComponent);
+    fixture = TestBed.createComponent(BookerContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

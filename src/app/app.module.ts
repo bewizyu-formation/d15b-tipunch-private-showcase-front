@@ -20,6 +20,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HeaderInterceptor} from './service/HeaderInterceptor';
 import { EventContainerComponent } from './event-container/event-container.component';
+import { BookerContainerComponent } from './booker-container/booker-container.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EventContainerComponent } from './event-container/event-container.compo
     UsersContainerComponent,
     ArtistsContainerComponent,
     HeaderComponent,
-    EventContainerComponent
+    EventContainerComponent,
+    BookerContainerComponent
   ],
   imports: [
     BrowserModule,
