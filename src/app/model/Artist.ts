@@ -15,8 +15,9 @@ export class Artist extends User {
         public website: string,
         public artistEmail: string,
         public departments: Department[],
-        public picture: string
-
+        public picture: string,
+        public address: string,
+        public phone: string
     ) {
         super(id, login, password, email, city);
     }

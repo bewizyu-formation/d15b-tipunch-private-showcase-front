@@ -3,6 +3,7 @@ import {Artist} from '../model/Artist';
 import {HttpClient} from '../../../node_modules/@angular/common/http';
 import {environment} from '../../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
+import {Department} from '../model/Department';
 
 const ARTIST_URL = 'artists/';
 const DEPARTMENT_URL = 'department/';
@@ -22,8 +23,7 @@ export class ArtistApi {
       email: artist.email,
       city: artist.city.id,
       artistName: artist.artistName,
-      shortDescription: artist.shortDescription,
-      artistEmail: artist.artistEmail,
+      shortDescription: artist.shortDescription
     });
   }
 
@@ -40,6 +40,8 @@ export class ArtistApi {
   }
 
   update(artist: Artist) {
+    const arrayIdDept: number[] = artist.departments.map((dep: Department) => dep.id);
+
     return this.http.put(`${environment.API_BASE_URL}${ARTIST_URL}${artist.id}`, {
       login: artist.login,
       password: artist.password,
@@ -47,8 +49,14 @@ export class ArtistApi {
       city: artist.city.id,
       artistName: artist.artistName,
       shortDescription: artist.shortDescription,
+      longDescription: artist.longDescription,
+      website: artist.website,
       artistEmail: artist.artistEmail,
-    });
+      departments: arrayIdDept,
+      picture: artist.picture,
+      address: artist.address,
+      phone: artist.phone
+    }, {observe: 'response'});
   }
 
   delete(artist: Artist) {

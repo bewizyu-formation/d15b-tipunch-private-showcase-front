@@ -7,7 +7,6 @@ import {SigninContainerComponent} from './signin-container/signin-container.comp
 import {LoginContainerComponent} from './login-container/login-container.component';
 import {HomeContainerComponent} from './home-container/home-container.component';
 import {UsersContainerComponent} from './users-container/users-container.component';
-import {ArtistsContainerComponent} from './artists-container/artists-container.component';
 
 import {ROUTES} from './app.routes';
 import {RouterModule} from '@angular/router';
@@ -20,6 +19,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HeaderInterceptor} from './service/HeaderInterceptor';
 import { EventContainerComponent } from './event-container/event-container.component';
+import { ArtistDetailsContainerComponent } from './artist-details-container/artist-details-container.component';
 import { BookerContainerComponent } from './booker-container/booker-container.component';
 
 @NgModule({
@@ -30,10 +30,10 @@ import { BookerContainerComponent } from './booker-container/booker-container.co
     LoginContainerComponent,
     HomeContainerComponent,
     UsersContainerComponent,
-    ArtistsContainerComponent,
     HeaderComponent,
     EventContainerComponent,
-    BookerContainerComponent
+    BookerContainerComponent,
+    ArtistDetailsContainerComponent
   ],
   imports: [
     BrowserModule,

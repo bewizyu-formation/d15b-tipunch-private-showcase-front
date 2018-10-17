@@ -1,0 +1,23 @@
+.artistContainer{
+  padding-top: 100px;
+}
+.summaryBlock{
+  margin: 40px;
+}
+.blockTitle{
+  color: white;
+  margin: 10px 40px;
+  display : flex;
+}
+.infoBlock{
+  margin: 10px 40px;
+}
+
+.blockContent{
+  background-color: white;
+}
+
+.imgArtist{
+  width: 200px;
+  height: auto;
+}

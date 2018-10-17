@@ -7,6 +7,7 @@ import {Department} from '../model/Department';
 import {CityService} from './CityService';
 import {City} from '../model/City';
 import {tap} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
 
 
 @Injectable({
@@ -37,13 +38,13 @@ export class ArtistService {
 
   findById(id: number) {
     return this.artistApi.findById(id).subscribe(
-      (artist: Artist) => {
+      (artist: Object) => {
         this.deptService.findAll().subscribe((departments: Department[]) => {
           this.arrayDept = departments;
           const depListJson = this.getDepartmentFromIds(artist['allowedDepartment']);
           const newArtist: Artist = this.getArtistFromJson(artist);
           newArtist.departments = depListJson;
-          this.cityService.findById(artist.id).subscribe(
+          this.cityService.findById(artist['city']).subscribe(
             (cityjson: City) => {
               const city = new City(cityjson.id, cityjson.departmentCode, cityjson.name);
               newArtist.city = city;
@@ -91,20 +92,20 @@ export class ArtistService {
     return allowDept;
   }
 
-  getArtistFromJson(a: Artist) {
+  getArtistFromJson(a: object) {
     return new Artist(
-      a.id, a.login, a.password,
-      a.email, null, a.artistName,
-      a.shortDescription, a.longDescription,
-      a.website, a.artistEmail, null, a.picture);
+      a['id'], a['login'], a['password'], a['email'],
+      null, a['artistName'], a['shortDescription'],
+      a['longDescription'], a['website'], a['artistEmail'],
+      null , a['picture'], a['address'], a['phoneNumber']);
   }
 
   update(artist: Artist) {
-    this.artistApi.update(artist).subscribe((artists: Artist) => {
-      const value: Artist[] = this.artists$.getValue();
-      const index = value.indexOf(value.filter(t => t.id === artists.id)[0]);
-      value[index] = artists;
-      this.artists$.next(value);
+    this.artistApi.update(artist).subscribe((artists: HttpResponse<Artist>) => {
+      const artistList: Artist[] = this.artists$.getValue();
+      const index = artistList.indexOf(artistList.filter(t => t.id === artists.body.id)[0]);
+      artistList[index] = artists.body;
+      this.artists$.next([...artistList]);
 
     });
   }

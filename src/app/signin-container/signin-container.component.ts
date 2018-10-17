@@ -72,6 +72,8 @@ export class SigninContainerComponent implements OnInit {
       this.emailCtrl.value,
       undefined,
       undefined,
+      null,
+      null,
       null);
   }
 
@@ -104,6 +106,8 @@ export class SigninContainerComponent implements OnInit {
         this.emailCtrl.value,
         undefined,
         undefined,
+      null,
+        null,
         null);
       this.artistService.save(this.newArtist);
       this.router.navigate(['login']);
