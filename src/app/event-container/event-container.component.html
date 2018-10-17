@@ -1,17 +1,28 @@
 <div class="container">
   <div class="container__event" *ngFor="let event of events$ | async">
     <div class="container__time">
-        <p>{{getDayNameOfDate(event.date_time) | uppercase}}</p>
-        <p>{{getDayAndMonthOfDate(event.date_time)}}</p>
-        <p>{{getTimeOfDate(event.date_time)}}</p>
+      <p>{{getDayNameOfDate(event.date_time) | uppercase}}</p>
+      <p>{{getDayAndMonthOfDate(event.date_time)}}</p>
+      <p>{{getTimeOfDate(event.date_time)}}</p>
     </div>
     <img src="../../assets/img/guitar.jpg">
     <div class="container__informations">
-      <h2>{{event.artist.artistName}}</h2>
+      <h2 *ngIf="event.artist !== undefined && event.artist !== null">{{event.artist.artistName}}</h2>
       <div class="container__address">
-          <mat-icon>email</mat-icon>
-          <p>{{event.address}}</p>
+        <mat-icon>email</mat-icon>
+        <p>{{event.address}}</p>
       </div>
+    </div>
+    <div *ngIf="userId === event.organizer_id">
+      <p>Organisateur</p>
+    </div>
+    <div *ngIf="userId !== event.organizer_id && isParticipating(event.guests) === false">
+      <button mat-stroked-button type="submit" class="form__buttons_item"
+              (click)=subscribeEvent(event.id)> Participer
+      </button>
+    </div>
+    <div *ngIf="isParticipating(event.guests)">
+      <p>Déjà inscrit</p>
     </div>
   </div>
 </div>

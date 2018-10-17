@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import { Event } from '../model/Event';
-import { EventApi } from '../api/EventApi';
-import { ArtistApi } from '../api/ArtistApi';
-import { Artist } from '../model/Artist';
+import {Event} from '../model/Event';
+import {EventApi} from '../api/EventApi';
+import {ArtistApi} from '../api/ArtistApi';
+import {Artist} from '../model/Artist';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,12 @@ export class EventService {
 
   findAll() {
     return this.eventApi.findAll().subscribe(
-        (events: Event[]) => {
-            events.forEach( e => {
-                this.artistApi.findById(e.artist_id).subscribe((a: Artist) => {console.log('artist: ' + a.artistName); e.artist = a; });
-            });
-            this.events$.next([...events]);
-        }
+      (events: Event[]) => {
+        events.forEach(e => {
+          this.artistApi.findById(e.artist_id).subscribe((a: Artist) => e.artist = a);
+        });
+        this.events$.next([...events]);
+      }
     );
   }
 
@@ -32,6 +32,12 @@ export class EventService {
       (e) => {
         console.log(e);
       }
+    );
+  }
+
+  addGuest(eventId, userId) {
+    return this.eventApi.addGuest(eventId, userId).subscribe(
+      (ev: Event) => ev
     );
   }
 }

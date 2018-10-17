@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { User } from '../model/User';
-import { EventService } from '../service/EventService';
-import { HeaderService } from '../service/HeaderService';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {User} from '../model/User';
+import {EventService} from '../service/EventService';
+import {HeaderService} from '../service/HeaderService';
 
 @Component({
   selector: 'app-booker-container',
@@ -22,9 +22,10 @@ export class BookerContainerComponent implements OnInit {
   currentUser$: Observable<User>;
   artistId;
   userId;
+
   constructor(private fb: FormBuilder,
-    private route: ActivatedRoute, private eventService: EventService,
-    private headerService: HeaderService, private router: Router) {
+              private route: ActivatedRoute, private eventService: EventService,
+              private headerService: HeaderService, private router: Router) {
     this.dateCtrl = fb.control('', [Validators.required]);
     this.addressCtrl = fb.control('', [Validators.required]);
     this.maxGuestsCtrl = fb.control({value: 'Illimité', disabled: true});
@@ -36,7 +37,7 @@ export class BookerContainerComponent implements OnInit {
       'maxGuests': this.maxGuestsCtrl,
       'date': this.dateCtrl,
       'hour': this.hourCtrl,
-      'minutes':  this.minutesCtrl,
+      'minutes': this.minutesCtrl,
     });
 
   }
@@ -45,7 +46,7 @@ export class BookerContainerComponent implements OnInit {
     // Getting artists related to user department code
     this.route.data.subscribe((data) => {
       this.currentUser$ = data.user;
-      this.currentUser$.subscribe( user => {
+      this.currentUser$.subscribe(user => {
         this.userId = user.id;
       });
     });
@@ -72,6 +73,6 @@ export class BookerContainerComponent implements OnInit {
       artist_id: parseInt(this.artistId, 10),
       organizer_id: parseInt(this.userId, 10),
     });
-    this.router.navigate(['events']);
+    this.router.navigate(['home']);
   }
 }

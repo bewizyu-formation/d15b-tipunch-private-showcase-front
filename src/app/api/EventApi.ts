@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import { Event } from '../model/Event';
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 
 const EVENTS_URL = 'events';
 
@@ -20,5 +19,9 @@ export class EventApi {
 
   save(event) {
     return this.http.post(`${environment.API_BASE_URL}${EVENTS_URL}`, event);
+  }
+
+  addGuest(eventId, userId) {
+    return this.http.post(`${environment.API_BASE_URL}${EVENTS_URL}/${eventId}/users/${userId}`, {});
   }
 }
