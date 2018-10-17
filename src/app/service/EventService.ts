@@ -19,19 +19,19 @@ export class EventService {
     return this.eventApi.findAll().subscribe(
         (events: Event[]) => {
             events.forEach( e => {
-                this.artistApi.findById(e.artist_id).subscribe((a: Artist) => {console.log('artist: '+a.artistName);e.artist = a});
-            })
-            this.events$.next([...events])
+                this.artistApi.findById(e.artist_id).subscribe((a: Artist) => {console.log('artist: ' + a.artistName); e.artist = a; });
+            });
+            this.events$.next([...events]);
         }
-    )
+    );
   }
 
   save(event) {
     return this.eventApi.save(event).subscribe(
-      (event: Event) => this.events$.next([event, ...this.events$.getValue()]),
+      (ev: Event) => this.events$.next([ev, ...this.events$.getValue()]),
       (e) => {
         console.log(e);
       }
-    )
+    );
   }
 }

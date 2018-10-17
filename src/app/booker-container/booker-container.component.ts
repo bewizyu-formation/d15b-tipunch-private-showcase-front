@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
 import { EventService } from '../service/EventService';
-import { UserService } from '../service/UserService';
 import { HeaderService } from '../service/HeaderService';
 
 @Component({
@@ -23,8 +22,8 @@ export class BookerContainerComponent implements OnInit {
   currentUser$: Observable<User>;
   artistId;
   userId;
-  constructor(private fb: FormBuilder, 
-    private route:ActivatedRoute, private eventService: EventService, 
+  constructor(private fb: FormBuilder,
+    private route: ActivatedRoute, private eventService: EventService,
     private headerService: HeaderService, private router: Router) {
     this.dateCtrl = fb.control('', [Validators.required]);
     this.addressCtrl = fb.control('', [Validators.required]);
@@ -41,14 +40,14 @@ export class BookerContainerComponent implements OnInit {
     });
 
   }
-  
+
   ngOnInit() {
     // Getting artists related to user department code
     this.route.data.subscribe((data) => {
       this.currentUser$ = data.user;
       this.currentUser$.subscribe( user => {
         this.userId = user.id;
-      })
+      });
     });
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.artistId = params.get('idArtist');
@@ -62,7 +61,7 @@ export class BookerContainerComponent implements OnInit {
     const minutes = this.bookForm.value.minutes < 10 ? `0${this.bookForm.value.minutes}` : `${this.bookForm.value.minutes}`;
 
     const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const month = date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : `${date.getMonth()+1}`;
+    const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
     const dateTime = `${date.getFullYear()}-${month}-${day} ${hour}:${minutes}`;
 
@@ -70,9 +69,9 @@ export class BookerContainerComponent implements OnInit {
     this.eventService.save({
       address: address,
       date_time: dateTime,
-      artist_id: parseInt(this.artistId),
-      organizer_id: parseInt(this.userId),
+      artist_id: parseInt(this.artistId, 10),
+      organizer_id: parseInt(this.userId, 10),
     });
-    this.router.navigate(['events'])
+    this.router.navigate(['events']);
   }
 }

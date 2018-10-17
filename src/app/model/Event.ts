@@ -1,5 +1,5 @@
-import { Artist } from "./Artist";
-import { User } from "./User";
+import { Artist } from './Artist';
+import { User } from './User';
 
 export class Event {
     public artist: Artist;

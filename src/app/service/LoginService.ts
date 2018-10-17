@@ -26,7 +26,7 @@ export class LoginService {
     private storeJwtInCookie(headers) {
         headers.keys().forEach(k => {
             if (k === 'Authorization' || k === 'authorization') {
-                console.log("AUTHO OK")
+                console.log('AUTHO OK');
                 this.cookieService.set('tokenUser', headers.get(k));
             }
         });

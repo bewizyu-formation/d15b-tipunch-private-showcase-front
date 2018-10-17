@@ -17,19 +17,19 @@ export class EventContainerComponent implements OnInit {
     this.headerService.emitChange('Evenements', 'event');
   }
 
-  getDayNameOfDate(str: string){
+  getDayNameOfDate(str: string) {
     const date = new Date();
-    let options = { weekday: 'short'};
-    return date.toLocaleDateString('fr-FR', options).substring(0,3);
+    const options = { weekday: 'short'};
+    return date.toLocaleDateString('fr-FR', options).substring(0, 3);
   }
 
-  getDayAndMonthOfDate(str: string){
+  getDayAndMonthOfDate(str: string) {
     const date = new Date(str);
-    return `${date.getDate()} / ${date.getMonth()+1}`
+    return `${date.getDate()} / ${date.getMonth() + 1}`;
   }
 
-  getTimeOfDate(str: string){
+  getTimeOfDate(str: string) {
     const date = new Date(str);
-    return `à ${date.getHours()}h${date.getMinutes()}`
+    return `à ${date.getHours()}h${date.getMinutes()}`;
   }
 }
