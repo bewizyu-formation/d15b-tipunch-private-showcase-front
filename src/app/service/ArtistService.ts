@@ -7,6 +7,7 @@ import {Department} from '../model/Department';
 import {CityService} from './CityService';
 import {City} from '../model/City';
 import {tap} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
 
 
 @Injectable({
@@ -100,11 +101,11 @@ export class ArtistService {
   }
 
   update(artist: Artist) {
-    this.artistApi.update(artist).subscribe((artists: Artist) => {
-      const value: Artist[] = this.artists$.getValue();
-      const index = value.indexOf(value.filter(t => t.id === artists.id)[0]);
-      value[index] = artists;
-      this.artists$.next(value);
+    this.artistApi.update(artist).subscribe((artists: HttpResponse<Artist>) => {
+      const artistList: Artist[] = this.artists$.getValue();
+      const index = artistList.indexOf(artistList.filter(t => t.id === artists.body.id)[0]);
+      artistList[index] = artists.body;
+      this.artists$.next([...artistList]);
 
     });
   }

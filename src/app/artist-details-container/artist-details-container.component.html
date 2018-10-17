@@ -7,17 +7,17 @@
         <div class="descriptionContainer">
           <div class="form__field">
             <mat-form-field>
-              <input matInput formControlName="artistName" value='{{ (artist$| async)?.artistName }}'>
+              <input matInput formControlName="artistName" >
             </mat-form-field>
           </div>
           <div class="form__field">
             <mat-form-field>
-              <input matInput formControlName="shortDescription" value='{{ (artist$| async)?.shortDescription }}'>
+              <input matInput formControlName="shortDescription" >
             </mat-form-field>
           </div>
           <div class="form__field">
             <mat-form-field>
-              <input matInput formControlName="longDescription" value='{{ (artist$| async)?.longDescription }}'>
+              <input matInput formControlName="longDescription" >
             </mat-form-field>
           </div>
         </div>
@@ -29,22 +29,27 @@
       <div class="blockContent">
         <div class="form__field">
           <mat-form-field>
-            <input matInput formControlName="website" value='{{ (artist$| async)?.website }}'>
+            <input matInput formControlName="website" >
           </mat-form-field>
         </div>
         <div class="form__field">
           <mat-form-field>
-            <input matInput formControlName="phone" value='{{ (artist$| async)?.phone }}'>
+            <input matInput formControlName="phone" >
           </mat-form-field>
         </div>
         <div class="form__field">
           <mat-form-field>
-            <input matInput formControlName="artistEmail" value='{{ (artist$| async)?.artistEmail }}'>
+            <input matInput formControlName="artistEmail" >
           </mat-form-field>
         </div>
         <div class="form__field">
           <mat-form-field>
-            <input matInput formControlName="address" value='{{ (artist$| async)?.address }}'>
+            <input matInput formControlName="address">
+          </mat-form-field>
+        </div>
+        <div class="form__field">
+          <mat-form-field>
+            <input matInput formControlName="departments" >
           </mat-form-field>
         </div>
 

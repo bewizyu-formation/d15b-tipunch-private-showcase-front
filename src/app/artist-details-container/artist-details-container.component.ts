@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {User} from '../model/User';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Artist} from '../model/Artist';
+import {Department} from '../model/Department';
 
 @Component({
   selector: 'app-artist-details-container',
@@ -16,7 +17,7 @@ export class ArtistDetailsContainerComponent implements OnInit {
 
   artist$ = this.artistService.getArtist$.asObservable();
   currentUser$: Observable<User>;
-  isOwner = false ;
+  isOwner = false;
   currentArtist: Artist;
 
   updateForm: FormGroup;
@@ -39,7 +40,7 @@ export class ArtistDetailsContainerComponent implements OnInit {
     this.phoneCtrl = fb.control('');
     this.artistEmailCtrl = fb.control('');
     this.addressCtrl = fb.control('');
-    // this.departmentsCtrl = fb.control('');
+    this.departmentsCtrl = fb.control('');
 
     this.updateForm = fb.group({
       'artistName': this.artistNameCtrl,
@@ -61,28 +62,57 @@ export class ArtistDetailsContainerComponent implements OnInit {
     this.activeRoute.data.subscribe((data) => {
       this.currentUser$ = data.user;
       this.currentUser$.subscribe(user => {
-        if (user.id === parseInt(routeParams.idArtist) ) {
-          this.isOwner = true ;
+        if (user.id === parseInt(routeParams.idArtist, 10)) {
+          this.isOwner = true;
         }
       });
     });
 
-    this.artist$.forEach(a => this.currentArtist = a);
+    this.artist$.subscribe(a => {
+      if (a != null) {
+        this.artistNameCtrl.setValue(a.artistName);
+        this.shortDescriptionCtrl.setValue(a.shortDescription);
+        this.longDescriptionCtrl.setValue(a.longDescription);
+        this.websiteCtrl.setValue(a.website);
+        this.phoneCtrl.setValue(a.phone);
+        this.artistEmailCtrl.setValue(a.artistEmail);
+        this.addressCtrl.setValue(a.address);
+        let stringdep = '' ;
+        a.departments.forEach(dep => stringdep += dep.id + ',');
+        this.departmentsCtrl.setValue(stringdep);
+
+        this.currentArtist = a;
+      }
+    });
   }
 
   onSubmit() {
-    console.log('before');
-    console.log(this.currentArtist);
-    this.currentArtist.artistName = this.artistNameCtrl.value;
-    this.currentArtist.shortDescription = this.shortDescriptionCtrl.value;
-    this.currentArtist.longDescription = this.longDescriptionCtrl.value;
-    this.currentArtist.website = this.websiteCtrl.value;
-    this.currentArtist.artistEmail = this.artistEmailCtrl.value;
-    this.currentArtist.phone = this.phoneCtrl.value;
-    this.currentArtist.address = this.addressCtrl.value;
-    // this.currentArtist.departments = this.departmentsCtrl.value;
-    console.log('after');
-    console.log(this.currentArtist);
+    const deptArray = [];
+    const idArray = this.updateForm.value.departments.split(',') ;
+    idArray.forEach(id => {
+      if (id) {
+        deptArray.push(new Department(id, null, null));
+      }
+    });
+    console.log(deptArray);
+
+    const newAtist = new Artist(
+      this.currentArtist.id,
+      this.currentArtist.login,
+      null,
+      this.currentArtist.email,
+      this.currentArtist.city,
+      this.updateForm.value.artistName,
+      this.updateForm.value.shortDescription,
+      this.updateForm.value.longDescription,
+      this.updateForm.value.website,
+      this.updateForm.value.artistEmail,
+      deptArray,
+      null,
+      this.updateForm.value.address,
+      this.updateForm.value.phone
+    );
+    console.log(newAtist);
     this.artistService.update(this.currentArtist);
   }
 }

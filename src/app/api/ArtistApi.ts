@@ -40,8 +40,8 @@ export class ArtistApi {
   }
 
   update(artist: Artist) {
-    const arrayIdDept: number[] = [] ;
-    artist.departments.forEach((dep: Department) => arrayIdDept.push(dep.id));
+    const arrayIdDept: number[] = artist.departments.map((dep: Department) => dep.id);
+
     return this.http.put(`${environment.API_BASE_URL}${ARTIST_URL}${artist.id}`, {
       login: artist.login,
       password: artist.password,
@@ -56,7 +56,7 @@ export class ArtistApi {
       picture: artist.picture,
       address: artist.address,
       phone: artist.phone
-    });
+    }, {observe: 'response'});
   }
 
   delete(artist: Artist) {
