@@ -19,7 +19,6 @@ export class EventService {
     return this.eventApi.findAll().subscribe(
         (events: Event[]) => {
             events.forEach( e => {
-                console.log('test');
                 this.artistApi.findById(e.artist_id).subscribe((a: Artist) => {console.log('artist: '+a.artistName);e.artist = a});
             })
             this.events$.next([...events])
@@ -27,7 +26,12 @@ export class EventService {
     )
   }
 
-  save(event: Event) {
-    return this.eventApi.save(event);
+  save(event) {
+    return this.eventApi.save(event).subscribe(
+      (event: Event) => this.events$.next([event, ...this.events$.getValue()]),
+      (e) => {
+        console.log(e);
+      }
+    )
   }
 }

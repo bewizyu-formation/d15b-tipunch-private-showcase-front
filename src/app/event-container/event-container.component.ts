@@ -13,8 +13,8 @@ export class EventContainerComponent implements OnInit {
   constructor(private headerService: HeaderService, private eventService: EventService) { }
 
   ngOnInit() {
-    this.headerService.emitChange('Evenements', 'event');
     this.eventService.findAll();
+    this.headerService.emitChange('Evenements', 'event');
   }
 
   getDayNameOfDate(str: string){

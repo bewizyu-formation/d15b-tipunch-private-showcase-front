@@ -15,6 +15,7 @@
     box-shadow: 2px 2px 5px black;
     background-color: lightgray;
     width: 80vw;
+    margin-top: 10px;
 }
 .container__event :nth-child(1){
     margin-left: 10px;

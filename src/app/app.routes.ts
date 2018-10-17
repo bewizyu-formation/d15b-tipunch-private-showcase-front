@@ -7,6 +7,7 @@ import { UsersContainerComponent } from './users-container/users-container.compo
 import { ArtistsContainerComponent } from './artists-container/artists-container.component';
 import {UserResolver} from './UserResolver';
 import { EventContainerComponent } from './event-container/event-container.component';
+import { BookerContainerComponent } from './booker-container/booker-container.component';
 
 export const PATH_HOMEPAGE = '';
 export const PATH_SIGNIN = 'signin';
@@ -14,7 +15,7 @@ export const PATH_LOGIN = 'login';
 
 export const PATH_HOME = 'home';
 export const PATH_HOME_EVENT = 'events';
-
+export const PATH_BOOKER_ARTIST = 'booker/:idArtist';
 export const PATH_HOME_USERS = 'users/:idUser';
 export const PATH_HOME_ARTISTS = 'artists/:idArtist';
 
@@ -31,5 +32,10 @@ export const ROUTES: Routes = [
         resolve: {
           user: UserResolver
         },
+    },
+    { path: PATH_BOOKER_ARTIST, component: BookerContainerComponent,
+      resolve: {
+        user: UserResolver
+      },
     },
   ];
